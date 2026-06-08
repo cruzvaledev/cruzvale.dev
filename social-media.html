@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="grain">
-  <header class="site-header">
+  <header class="site-header float" id="hdr">
     <div class="wrap header-inner">
       <a href="index.html" class="brand">Cruz Vale</a>
       <nav class="main-nav" aria-label="Main">
@@ -24,24 +24,28 @@
     </div>
   </header>
 
-  <section class="page-title">
-    <div class="wrap">
-      <p class="eyebrow">Services</p>
-      <h1>Social Media Management</h1>
-      <p class="lede">I keep local businesses looking active and professional online, so your feed works for you even when you are busy running the place.</p>
+  <!-- Full-screen shop hero -->
+  <section class="photo-hero">
+    <div class="bg"><img src="images/marketing-store.jpg" alt="A gold Honda Accord parked in front of a local Topeka computer sales and service store during a content shoot" /></div>
+    <div class="ov"></div>
+    <div class="inner">
+      <p class="eyebrow reveal d1">Social Media Management</p>
+      <h1 class="reveal d2"><span>Keep your business</span><span class="em">looking good.</span></h1>
+      <p class="tagline reveal d3">Social media management for local businesses in Topeka. Consistent posting, original photos, and a feed that looks like someone is paying attention.</p>
     </div>
+    <a class="scroll-cue" href="#details" aria-label="Scroll to details">
+      <span>Scroll</span><span class="arrow"></span>
+    </a>
   </section>
 
-  <section style="padding-top:0;">
+  <!-- Details -->
+  <section id="details">
     <div class="wrap">
-      <div class="banner">
-        <img src="images/marketing-store.jpg" alt="A gold Honda Accord parked in front of a local Topeka computer shop during a content shoot" />
-      </div>
-
-      <div class="split" style="margin-top:48px;">
+      <div class="split">
         <div>
+          <p class="eyebrow">What you get</p>
           <h2>Consistency, without the hassle.</h2>
-          <p>Most small businesses know they should be posting more, but it slips when the day gets busy. I take that off your plate. I plan the content, shoot the photos, write the captions, and keep a steady rhythm so your page always looks like someone is paying attention.</p>
+          <p>Most small businesses know they should be posting more, but it slips when the day gets busy. I take that off your plate. I plan the content, shoot the photos, write the captions, and keep a steady rhythm so your page always looks active.</p>
           <p>Everything is shot and written for your business specifically. No stock photos, no recycled templates, just real content that looks like you.</p>
         </div>
         <div>
@@ -66,5 +70,12 @@
   </section>
 
   <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+
+  <script>
+    var hdr = document.getElementById('hdr');
+    function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
 </body>
 </html>
