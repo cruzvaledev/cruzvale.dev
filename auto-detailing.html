@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="grain">
-  <header class="site-header">
+  <header class="site-header float" id="hdr">
     <div class="wrap header-inner">
       <a href="index.html" class="brand">Cruz Vale</a>
       <nav class="main-nav" aria-label="Main">
@@ -24,29 +24,26 @@
     </div>
   </header>
 
-  <section class="page-title">
-    <div class="wrap">
-      <p class="eyebrow">Services</p>
-      <h1>Auto Detailing</h1>
-      <p class="lede">Interior and exterior detailing done with the same patience I put into my own builds. Your car comes back looking and feeling like new.</p>
+  <!-- Full-screen foam hero -->
+  <section class="photo-hero">
+    <div class="bg"><img src="images/detail-exterior.jpg" alt="A white Chevy Malibu covered in foam soap during an exterior detail" /></div>
+    <div class="ov"></div>
+    <div class="inner">
+      <p class="eyebrow reveal d1">Auto Detailing</p>
+      <h1 class="reveal d2"><span>The little things,</span><span class="em">done right.</span></h1>
+      <p class="tagline reveal d3">Interior and exterior detailing in Topeka, done with the same patience I put into my own builds. Your car comes back looking and feeling like new.</p>
     </div>
+    <a class="scroll-cue" href="#details" aria-label="Scroll to details">
+      <span>Scroll</span><span class="arrow"></span>
+    </a>
   </section>
 
-  <section style="padding-top:0;">
+  <!-- Details -->
+  <section id="details">
     <div class="wrap">
-      <div class="duo">
-        <div class="tile port" style="aspect-ratio:auto;">
-          <div class="img" style="aspect-ratio:4/5;"><img src="images/detail-exterior.jpg" alt="A white Chevy Malibu covered in foam during an exterior detail" /></div>
-          <div class="cap"><div class="c-cat">Exterior</div><div class="c-txt">Foam wash and full exterior clean.</div></div>
-        </div>
-        <div class="tile port" style="aspect-ratio:auto;">
-          <div class="img" style="aspect-ratio:4/5;"><img src="images/detail-interior.jpg" alt="The clean tan leather interior of a freshly detailed Chevy Malibu" /></div>
-          <div class="cap"><div class="c-cat">Interior</div><div class="c-txt">Deep interior clean, seats to dash.</div></div>
-        </div>
-      </div>
-
-      <div class="split" style="margin-top:48px;">
+      <div class="split">
         <div>
+          <p class="eyebrow">What is included</p>
           <h2>Detailed, not rushed.</h2>
           <p>A good detail is about patience and the small stuff. I take my time on the areas most washes skip, and I treat every car like it is going on display.</p>
           <p>Whether you are cleaning up a daily driver or getting something ready to sell or show, I will get it right.</p>
@@ -61,6 +58,13 @@
           </ul>
         </div>
       </div>
+
+      <figure style="max-width:520px; margin:56px auto 0;">
+        <div class="tile port">
+          <div class="img"><img src="images/detail-interior.jpg" alt="The clean tan leather interior and dashboard of a freshly detailed Chevy Malibu" /></div>
+          <div class="cap"><div class="c-cat">The result</div><div class="c-txt">A full interior detail, seats to dash.</div></div>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -73,5 +77,12 @@
   </section>
 
   <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+
+  <script>
+    var hdr = document.getElementById('hdr');
+    function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
 </body>
 </html>
