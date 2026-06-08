@@ -80,9 +80,12 @@
 
   <script>
     var hdr = document.getElementById('hdr');
+    function setHH(){ document.documentElement.style.setProperty('--hh', hdr.offsetHeight + 'px'); }
     function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
-    onScroll();
+    setHH(); onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', setHH);
+    window.addEventListener('load', setHH);
   </script>
 </body>
 </html>

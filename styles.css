@@ -172,3 +172,14 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 .scroll-cue { position:absolute; left:50%; bottom:24px; transform:translateX(-50%); z-index:2; color:rgba(255,255,255,0.8); font-size:11.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
 .scroll-cue .arrow { width:16px; height:16px; border-right:2px solid rgba(255,255,255,0.8); border-bottom:2px solid rgba(255,255,255,0.8); transform:rotate(45deg); animation:bob 1.6s ease-in-out infinite; }
 @keyframes bob { 0%,100%{ transform:rotate(45deg) translate(0,0); } 50%{ transform:rotate(45deg) translate(4px,4px); } }
+
+/* ============ Mobile fix: keep photo-hero text clear of the fixed header ============ */
+@media (max-width:680px){
+  .brand { font-size:20px; }
+  .main-nav { gap:6px; }
+  .main-nav a { padding:7px 12px; font-size:13.5px; }
+  .photo-hero { align-items:flex-start; }
+  .photo-hero .inner { padding:calc(var(--hh, 160px) + 22px) 24px 96px; }
+  .photo-hero h1 { font-size:clamp(40px, 12vw, 62px); }
+  .photo-hero .tagline { font-size:16.5px; margin-top:18px; }
+}
