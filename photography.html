@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Photography by Cruz Vale in Topeka, Kansas. Product, automotive, landscape, and creative work." />
+  <meta name="description" content="Photography by Cruz Vale in Topeka, Kansas. Automotive, landscape, product, and creative work." />
   <title>Photography | Cruz Vale</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="grain">
-  <header class="site-header">
+  <header class="site-header float" id="hdr">
     <div class="wrap header-inner">
       <a href="index.html" class="brand">Cruz Vale</a>
       <nav class="main-nav" aria-label="Main">
@@ -24,24 +24,35 @@
     </div>
   </header>
 
-  <section class="page-title">
-    <div class="wrap">
-      <p class="eyebrow">Services</p>
-      <h1>Photography</h1>
-      <p class="lede">Product, automotive, landscape, and creative work. I shoot for businesses that need clean images and for anyone who wants a moment done right.</p>
+  <!-- Full-screen lightning hero -->
+  <section class="photo-hero">
+    <div class="bg"><img src="images/photo-lightning.jpg" alt="A lightning strike over a lake at dusk" /></div>
+    <div class="ov"></div>
+    <div class="inner">
+      <p class="eyebrow reveal d1">Photography</p>
+      <h1 class="reveal d2"><span>Chasing the</span><span class="em">good light.</span></h1>
+      <p class="tagline reveal d3">Automotive, landscape, product, and creative photography for people and businesses around Topeka, Kansas.</p>
     </div>
+    <a class="scroll-cue" href="#gallery" aria-label="Scroll to gallery">
+      <span>Scroll</span><span class="arrow"></span>
+    </a>
   </section>
 
-  <section style="padding-top:0;">
+  <!-- Gallery -->
+  <section id="gallery">
     <div class="wrap">
+      <p class="eyebrow">Selected frames</p>
+      <h2>A look through the lens.</h2>
+      <p class="lede">A mix of recent work. Cars, weather, builds, and the occasional product shoot.</p>
+
       <div class="duo">
         <div class="tile land">
           <div class="img"><img src="images/photo-mustang.jpg" alt="A black Mustang on the road at golden hour with its headlights on" /></div>
           <div class="cap"><div class="c-cat">Automotive</div><div class="c-txt">Golden hour roll shot.</div></div>
         </div>
         <div class="tile land">
-          <div class="img"><img src="images/photo-lightning.jpg" alt="A lightning strike over a lake at dusk" /></div>
-          <div class="cap"><div class="c-cat">Landscape</div><div class="c-txt">Lightning over the lake, long exposure.</div></div>
+          <div class="img"><img src="images/marketing-store.jpg" alt="A gold Honda Accord parked in front of a local Topeka computer shop" /></div>
+          <div class="cap"><div class="c-cat">On location</div><div class="c-txt">Content shoot for a local shop.</div></div>
         </div>
       </div>
 
@@ -56,7 +67,11 @@
         </div>
         <div class="tile port">
           <div class="img"><img src="images/computer-white.jpg" alt="An all white custom gaming PC build with lit fans" /></div>
-          <div class="cap"><div class="c-cat">Product</div><div class="c-txt">Custom PC build.</div></div>
+          <div class="cap"><div class="c-cat">Product</div><div class="c-txt">Custom PC build, white.</div></div>
+        </div>
+        <div class="tile port">
+          <div class="img"><img src="images/computer-black.jpg" alt="A blacked out custom PC build with RGB lit fans glowing in the dark" /></div>
+          <div class="cap"><div class="c-cat">Product</div><div class="c-txt">Custom PC build, blacked out.</div></div>
         </div>
       </div>
     </div>
@@ -65,11 +80,18 @@
   <section class="alt">
     <div class="wrap" style="text-align:center;">
       <h2>Have a shoot in mind?</h2>
-      <p class="lede" style="margin:0 auto 28px;">Products, cars, portraits, or something creative. Let me know what you are picturing.</p>
+      <p class="lede" style="margin:0 auto 28px;">Products, cars, portraits, or something creative. Tell me what you are picturing.</p>
       <a class="btn btn-primary" href="contact.html">Book a shoot</a>
     </div>
   </section>
 
   <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+
+  <script>
+    var hdr = document.getElementById('hdr');
+    function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
 </body>
 </html>
