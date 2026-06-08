@@ -183,3 +183,6 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
   .photo-hero h1 { font-size:clamp(40px, 12vw, 62px); }
   .photo-hero .tagline { font-size:16.5px; margin-top:18px; }
 }
+
+/* Photography gallery grid — scales gracefully from 1 photo to many */
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; margin-top:36px; }
