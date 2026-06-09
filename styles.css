@@ -200,9 +200,8 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
   .slogan { font-size:clamp(42px, 11vw, 76px); }
 }
 
-/* ============ Social hero on mobile: show the whole photo (car + sign), text below it ============ */
+/* ============ Social hero on phones: shorter so the front of the car AND the full sign both fit ============ */
 @media (max-width:680px){
-  .photo-hero.stacked .bg img { object-fit:contain; object-position:top center; }
-  .photo-hero.stacked .ov { background:linear-gradient(180deg, rgba(8,10,16,0.55) 0%, rgba(8,10,16,0) 20%, rgba(8,10,16,0) 100%); }
-  .photo-hero.stacked .inner { padding:calc(66.7vw + 18px) 24px 90px; }
+  .photo-hero.shop { min-height:148vw; }
+  .photo-hero.shop .bg img { object-position:55% center; }
 }
