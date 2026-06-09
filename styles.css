@@ -186,3 +186,16 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 
 /* Photography gallery grid — scales gracefully from 1 photo to many */
 .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; margin-top:36px; }
+
+/* ============ Landing nav matches the inner-page pill nav (white over photo) ============ */
+.landing-top .main-nav { justify-content:center; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.landing-top .main-nav a { color:rgba(255,255,255,0.92); padding:9px 16px; }
+.landing-top .main-nav a:hover { color:#fff; background:rgba(255,255,255,0.16); }
+.landing-top .main-nav .nav-cta { background:#fff; color:var(--ink); }
+.landing-top .main-nav .nav-cta:hover { background:rgba(255,255,255,0.85); color:var(--ink); }
+
+/* Smaller hero headline on phones so long words never clip at the edges */
+@media (max-width:680px){
+  .photo-hero h1 { font-size:clamp(34px, 10vw, 56px); }
+  .slogan { font-size:clamp(42px, 11vw, 76px); }
+}
