@@ -185,7 +185,10 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 }
 
 /* Photography gallery grid — scales gracefully from 1 photo to many */
-.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; margin-top:36px; }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; margin-top:36px; align-items:start; }
+.portrait-grid { align-items:start; }
+.gallery-grid .tile.port .img { aspect-ratio:3/4; }
+.gallery-grid .tile.land .img { aspect-ratio:3/2; }
 
 /* ============ Landing nav matches the inner-page pill nav (white over photo) ============ */
 .landing-top .main-nav { justify-content:center; flex-wrap:wrap; gap:8px; margin-top:18px; }
