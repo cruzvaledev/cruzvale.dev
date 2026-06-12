@@ -24,6 +24,19 @@
     .carousel .dots button.active{background:#fff;}
     .carousel.single .cbtn,.carousel.single .dots{display:none;}
     @media (max-width:560px){ .carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
+    .price-group{margin-top:50px;}
+    .price-group .eyebrow{margin-bottom:4px;}
+    .price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:20px;}
+    .price-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 30px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+    .price-card.feature{border-color:var(--rust);}
+    .price-card h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);}
+    .price-card .price{font-size:14px;color:var(--ink-faint);margin:4px 0 18px;font-weight:500;}
+    .price-card .price strong{display:block;font-family:var(--display);font-size:34px;font-weight:700;color:var(--rust);line-height:1.1;margin-top:2px;}
+    .price-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .price-card li{position:relative;padding-left:22px;color:var(--ink-soft);font-size:15px;line-height:1.4;}
+    .price-card li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--rust);opacity:.85;}
+    .price-note{margin-top:42px;padding:22px 26px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
+    @media (max-width:560px){ .price-card{padding:24px 22px 26px;} }
   </style>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://cruzvale.dev/photography.html" />
@@ -169,6 +182,76 @@
         <button class="cbtn cnext" aria-label="Next">&#8250;</button>
         <div class="dots"></div>
       </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h2>Fair prices, honest work.</h2>
+      <p class="lede" style="max-width:60ch;">Straightforward starting prices on the sessions and services I offer, kept competitive with other local photographers so you get more for your money.</p>
+
+      <div class="price-group">
+        <p class="eyebrow">Portrait Sessions</p>
+        <div class="price-cards">
+          <div class="price-card">
+            <h3>Quick Shoot</h3>
+            <p class="price"><strong>$99</strong></p>
+            <ul>
+              <li>20-minute session</li>
+              <li>One location</li>
+              <li>8 professionally edited digital images</li>
+              <li>Great for updated portraits, social media, couples, or a simple senior session</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <h3>Standard Session</h3>
+            <p class="price"><strong>$175</strong></p>
+            <ul>
+              <li>45-minute session</li>
+              <li>One location</li>
+              <li>15 professionally edited digital images</li>
+              <li>A great all-around option for portraits, couples, seniors, small families, or creative shoots</li>
+            </ul>
+          </div>
+          <div class="price-card feature">
+            <h3>Full Session</h3>
+            <p class="price"><strong>$249</strong></p>
+            <ul>
+              <li>Up to 75 minutes</li>
+              <li>Multiple poses and an optional outfit change</li>
+              <li>25 professionally edited digital images</li>
+              <li>Best for seniors, families, branding, automotive shoots, or anyone wanting more variety</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-group">
+        <p class="eyebrow">Commercial &amp; Events</p>
+        <div class="price-cards">
+          <div class="price-card">
+            <h3>Business &amp; Product Photography</h3>
+            <p class="price">Starting at <strong>$175</strong></p>
+            <ul>
+              <li>Local businesses and websites</li>
+              <li>Social media and product listings</li>
+              <li>Menus and promotional content</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <h3>Event Coverage</h3>
+            <p class="price"><strong>$100/hr</strong></p>
+            <ul>
+              <li>Small events, car meets, and parties</li>
+              <li>Business events and local gatherings</li>
+              <li>Two-hour minimum</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="price-note"><strong>A note on pricing:</strong> all prices are starting points and can vary with location, group size, and how much editing you are after. Tell me what you have in mind and I will put together an exact quote before we shoot.</p>
     </div>
   </section>
 
