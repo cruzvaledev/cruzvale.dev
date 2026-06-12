@@ -16,6 +16,24 @@
   <meta property="og:image" content="https://cruzvale.dev/images/computer-black.jpg" />
   <meta property="og:url" content="https://cruzvale.dev/about.html" />
   <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    .review-carousel{position:relative;margin-top:36px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);}
+    .review-carousel .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+    .review-carousel .slide{min-width:100%;}
+    .review-card{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:56px 44px 64px;}
+    .review-card .stars{color:var(--rust);font-size:20px;letter-spacing:3px;}
+    .review-card .review-text{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(19px,2.4vw,26px);line-height:1.4;color:var(--ink);max-width:44ch;}
+    .review-card .review-by{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+    .review-carousel .cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(34,29,22,.5);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s;}
+    .review-carousel .cbtn:hover{background:rgba(34,29,22,.8);}
+    .review-carousel .cprev{left:14px;}
+    .review-carousel .cnext{right:14px;}
+    .review-carousel .dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:8px;justify-content:center;z-index:2;}
+    .review-carousel .dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(34,29,22,.22);cursor:pointer;}
+    .review-carousel .dots button.active{background:var(--rust);}
+    .review-carousel.single .cbtn,.review-carousel.single .dots{display:none;}
+    @media (max-width:560px){ .review-card{padding:48px 28px 60px;min-height:340px;} .review-carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
+  </style>
 </head>
 <body class="grain">
   <header class="site-header">
@@ -82,6 +100,70 @@
     </div>
   </section>
 
+  <section class="alt" id="reviews">
+    <div class="wrap">
+      <p class="eyebrow">What clients say</p>
+      <h2>Recommended by the people I have worked with.</h2>
+      <p class="lede">Real feedback from clients on the computer builds, repairs, and upgrades I have done for them.</p>
+      <div class="review-carousel" data-autoplay="6000">
+        <div class="track">
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“He did a great job expanding the storage size of my PC by cloning the hard drive to a new, larger one and adding more RAM. Everything went smoothly and quickly.”</p><div class="review-by">Kim T.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Very well put together pc”</p><div class="review-by">Jaxon T.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“built me my first pc runs great”</p><div class="review-by">Johnathon M.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Amazing customer service. Knows what he’s saying and was kind enough to give us info for free and send possible replacement items too. 10/10”</p><div class="review-by">Ryanandkelsey H.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Kruzi was wonderful! Took his time to look over my computer, cleaning it up electronically and physically, while also improving air flow and increasing speed. I’ve definitely noticed a difference in game performance! I feel he really supports his customers and cares about what he does!”</p><div class="review-by">Alex T.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“I had a great experience. He had great communication, great prices, and very understanding. He even asked if I had questions about it and your rarely get that nowadays. I 10/10 recommend his products”</p><div class="review-by">Konner H.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Great service. Recently bought a computer from him and it’s done more than enough for my needs. Great deal for your money and service.”</p><div class="review-by">Marquis C.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Will be going to him for future pc needs! very helpful and insightful. Great guy! 100% recommend”</p><div class="review-by">Joshua S.</div></div></div>
+          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Bought a Pc from him runs nice looks amazing was very helpful with upgrade advice and services would recommend if on a budget and your looking for a good starter gaming PC.”</p><div class="review-by">Dominic S.</div></div></div>
+        </div>
+        <button class="cbtn cprev" aria-label="Previous review">&#8249;</button>
+        <button class="cbtn cnext" aria-label="Next review">&#8250;</button>
+        <div class="dots"></div>
+      </div>
+    </div>
+  </section>
+
   <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+
+  <script>
+    (function(){
+      var c = document.querySelector('.review-carousel');
+      if(!c){ return; }
+      var track = c.querySelector('.track');
+      var slides = c.querySelectorAll('.slide');
+      var n = slides.length;
+      if(n <= 1){ c.classList.add('single'); return; }
+      var dotsWrap = c.querySelector('.dots');
+      var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '6000', 10);
+      var dots = [];
+      for(var k = 0; k < n; k++){ (function(k){
+        var b = document.createElement('button');
+        b.setAttribute('aria-label', 'Go to review ' + (k + 1));
+        b.addEventListener('click', function(){ go(k); reset(); });
+        dotsWrap.appendChild(b); dots.push(b);
+      })(k); }
+      function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
+        for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
+      function next(){ go(i + 1); }
+      function prev(){ go(i - 1); }
+      function start(){ timer = setInterval(next, delay); }
+      function stop(){ clearInterval(timer); }
+      function reset(){ stop(); start(); }
+      c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
+      c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
+      c.addEventListener('mouseenter', stop);
+      c.addEventListener('mouseleave', start);
+      var x0 = null;
+      c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
+      c.addEventListener('touchend', function(e){
+        if(x0 === null){ return; }
+        var dx = e.changedTouches[0].clientX - x0;
+        if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
+        x0 = null; start();
+      }, { passive: true });
+      go(0); start();
+    })();
+  </script>
 </body>
 </html>
