@@ -31,6 +31,21 @@
     "provider": { "@type": "LocalBusiness", "name": "Cruz Vale", "url": "https://cruzvale.dev/", "telephone": "+1-785-338-1269" }
   }
   </script>
+  <style>
+    .price-group{margin-top:50px;}
+    .price-group .eyebrow{margin-bottom:4px;}
+    .price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:20px;}
+    .price-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 30px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+    .price-card.feature{border-color:var(--rust);}
+    .price-card h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);}
+    .price-card .price{font-size:14px;color:var(--ink-faint);margin:4px 0 18px;font-weight:500;}
+    .price-card .price strong{display:block;font-family:var(--display);font-size:34px;font-weight:700;color:var(--rust);line-height:1.1;margin-top:2px;}
+    .price-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .price-card li{position:relative;padding-left:22px;color:var(--ink-soft);font-size:15px;line-height:1.4;}
+    .price-card li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--rust);opacity:.85;}
+    .price-note{margin-top:42px;padding:22px 26px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
+    @media (max-width:560px){ .price-card{padding:24px 22px 26px;} }
+  </style>
 </head>
 <body class="grain">
   <header class="site-header float" id="hdr">
@@ -87,6 +102,97 @@
           <div class="img"><img src="images/detail-interior.jpg" alt="The clean tan leather interior and dashboard of a freshly detailed Chevy Malibu" /></div>
         </div>
       </figure>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h2>Fair prices, honest work.</h2>
+      <p class="lede" style="max-width:60ch;">Straightforward starting prices on the services I offer, kept competitive with other local shops so you get more for your money.</p>
+
+      <div class="price-group">
+        <p class="eyebrow">Interior Detailing</p>
+        <div class="price-cards">
+          <div class="price-card">
+            <h3>Interior Refresh</h3>
+            <p class="price">Starting at <strong>$149</strong></p>
+            <ul>
+              <li>Professional vacuuming</li>
+              <li>Thorough interior wipe down and blow out</li>
+              <li>Hair removal</li>
+              <li>Spot removal</li>
+              <li>Interior glass cleaning</li>
+              <li>Door and trunk jamb cleaning</li>
+              <li>Fresh scent</li>
+            </ul>
+          </div>
+          <div class="price-card feature">
+            <h3>Interior Deep Clean</h3>
+            <p class="price">Starting at <strong>$309</strong></p>
+            <ul>
+              <li>Everything in Interior Refresh</li>
+              <li>Deep shampoo</li>
+              <li>Stain treatment</li>
+              <li>Odor elimination</li>
+              <li>Interior treatment to protect and renew vinyl</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-group">
+        <p class="eyebrow">Exterior Detailing</p>
+        <div class="price-cards">
+          <div class="price-card">
+            <h3>Exterior Wash &amp; Shine</h3>
+            <p class="price">Starting at <strong>$109</strong></p>
+            <ul>
+              <li>Foam, high-pressure, and hand wash, then dried</li>
+              <li>Deep tire and wheel detailing</li>
+              <li>Tire treatment and shine</li>
+              <li>Exterior glass cleaning</li>
+            </ul>
+          </div>
+          <div class="price-card feature">
+            <h3>Exterior Wax &amp; Polish</h3>
+            <p class="price">Starting at <strong>$159</strong></p>
+            <ul>
+              <li>Everything in Exterior Wash &amp; Shine</li>
+              <li>Hand waxing and buffing</li>
+              <li>Paint polishing</li>
+              <li>Paint transfer, sticker, and tree sap removal</li>
+              <li>Exterior trim renewal and shine</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-group">
+        <p class="eyebrow">Combo — Interior + Exterior</p>
+        <div class="price-cards">
+          <div class="price-card">
+            <h3>Full Detail</h3>
+            <p class="price">Starting at <strong>$249</strong></p>
+            <ul>
+              <li>Interior Refresh</li>
+              <li>Exterior Wash &amp; Shine</li>
+              <li>Inside and out in one appointment</li>
+            </ul>
+          </div>
+          <div class="price-card feature">
+            <h3>Premium Full Detail</h3>
+            <p class="price">Starting at <strong>$349</strong></p>
+            <ul>
+              <li>Interior Deep Clean</li>
+              <li>Exterior Wax &amp; Polish</li>
+              <li>The full treatment, inside and out</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="price-note"><strong>A note on pricing:</strong> all prices are starting points and will vary with the size and condition of your vehicle. After a quick look or a few photos, I will give you an exact quote before any work begins. Ceramic coating and clay bar treatment are not offered yet, but are coming soon.</p>
     </div>
   </section>
 
