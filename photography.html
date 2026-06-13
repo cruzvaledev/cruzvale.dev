@@ -1,315 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Photography by Cruz Vale in Topeka, Kansas. Portraits, landscape, product, and automotive work." />
-  <title>Photography | Cruz Vale</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .carousel{position:relative;margin-top:28px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);}
-    .carousel .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-    .carousel .slide{min-width:100%;}
-    .carousel .frame{aspect-ratio:3/2;overflow:hidden;}
-    .carousel .frame img{width:100%;height:100%;object-fit:cover;display:block;}
-    .carousel .cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(34,29,22,.55);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s;}
-    .carousel .cbtn:hover{background:rgba(34,29,22,.85);}
-    .carousel .cprev{left:14px;}
-    .carousel .cnext{right:14px;}
-    .carousel .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;gap:8px;justify-content:center;z-index:2;}
-    .carousel .dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;}
-    .carousel .dots button.active{background:#fff;}
-    .carousel.single .cbtn,.carousel.single .dots{display:none;}
-    @media (max-width:560px){ .carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
-    .price-group{margin-top:50px;}
-    .price-group .eyebrow{margin-bottom:4px;}
-    .price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:20px;}
-    .price-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 30px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
-    .price-card.feature{border-color:var(--rust);}
-    .price-card h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);}
-    .price-card .price{font-size:14px;color:var(--ink-faint);margin:4px 0 18px;font-weight:500;}
-    .price-card .price strong{display:block;font-family:var(--display);font-size:34px;font-weight:700;color:var(--rust);line-height:1.1;margin-top:2px;}
-    .price-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
-    .price-card li{position:relative;padding-left:22px;color:var(--ink-soft);font-size:15px;line-height:1.4;}
-    .price-card li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--rust);opacity:.85;}
-    .price-note{margin-top:42px;padding:22px 26px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
-    @media (max-width:560px){ .price-card{padding:24px 22px 26px;} }
-  </style>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="canonical" href="https://cruzvale.dev/photography.html" />
-  <link rel="preload" as="image" href="images/photo-lightning.jpg" />
-  <meta name="theme-color" content="#f4eee2" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Photography | Cruz Vale" />
-  <meta property="og:description" content="Photography by Cruz Vale in Topeka, Kansas. Portraits, landscape, product, and automotive work." />
-  <meta property="og:image" content="https://cruzvale.dev/images/photo-lightning.jpg" />
-  <meta property="og:url" content="https://cruzvale.dev/photography.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Photography",
-    "serviceType": "Photography",
-    "description": "Automotive, landscape, product, portrait, and creative photography in Topeka, Kansas.",
-    "areaServed": "Topeka, Kansas",
-    "url": "https://cruzvale.dev/photography.html",
-    "provider": { "@type": "LocalBusiness", "name": "Cruz Vale", "url": "https://cruzvale.dev/", "telephone": "+1-785-338-1269" }
-  }
-  </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Photography by Cruz Vale in Topeka, Kansas. Portraits, landscape, product, and automotive work." />
+<title>Photography | Cruz Vale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.carousel{position:relative;margin-top:28px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);}
+.carousel .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.carousel .slide{min-width:100%;}
+.carousel .frame{aspect-ratio:3/2;overflow:hidden;}
+.carousel .frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.carousel .cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(34,29,22,.55);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s;}
+.carousel .cbtn:hover{background:rgba(34,29,22,.85);}
+.carousel .cprev{left:14px;}
+.carousel .cnext{right:14px;}
+.carousel .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;gap:8px;justify-content:center;z-index:2;}
+.carousel .dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;}
+.carousel .dots button.active{background:#fff;}
+.carousel.single .cbtn,.carousel.single .dots{display:none;}
+@media (max-width:560px){ .carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
+.price-group{margin-top:50px;}
+.price-group .eyebrow{margin-bottom:4px;}
+.price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:20px;}
+.price-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 30px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+.price-card.feature{border-color:var(--rust);}
+.price-card h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);}
+.price-card .price{font-size:14px;color:var(--ink-faint);margin:4px 0 18px;font-weight:500;}
+.price-card .price strong{display:block;font-family:var(--display);font-size:34px;font-weight:700;color:var(--rust);line-height:1.1;margin-top:2px;}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.price-card li{position:relative;padding-left:22px;color:var(--ink-soft);font-size:15px;line-height:1.4;}
+.price-card li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--rust);opacity:.85;}
+.price-note{margin-top:42px;padding:22px 26px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
+@media (max-width:560px){ .price-card{padding:24px 22px 26px;} }
+</style>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/photography.html" />
+<link rel="preload" as="image" href="images/photo-lightning.jpg" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Photography | Cruz Vale" />
+<meta property="og:description" content="Photography by Cruz Vale in Topeka, Kansas. Portraits, landscape, product, and automotive work." />
+<meta property="og:image" content="https://cruzvale.dev/images/photo-lightning.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/photography.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Service",
+"name": "Photography",
+"serviceType": "Photography",
+"description": "Automotive, landscape, product, portrait, and creative photography in Topeka, Kansas.",
+"areaServed": "Topeka, Kansas",
+"url": "https://cruzvale.dev/photography.html",
+"provider": { "@type": "LocalBusiness", "name": "Cruz Vale", "url": "https://cruzvale.dev/", "telephone": "+1-785-338-1269" }
+}
+</script>
 </head>
 <body class="grain">
-  <header class="site-header float" id="hdr">
-    <div class="wrap header-inner">
-      <a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
-      <nav class="main-nav" aria-label="Main">
-        <a href="social-media.html">Social Media</a>
-        <a href="photography.html" class="active">Photography</a>
-        <a href="auto-detailing.html">Auto Detailing</a>
-        <a href="partners.html">Partners</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="photo-hero">
-    <div class="bg"><img src="images/photo-lightning.jpg" alt="A lightning strike over a lake at dusk" /></div>
-    <div class="ov"></div>
-    <div class="inner">
-      <p class="eyebrow reveal d1">Photography</p>
-      <h1 class="reveal d2"><span>Chasing the</span><span class="em">good light.</span></h1>
-      <p class="tagline reveal d3">Automotive, landscape, product, and creative photography for people and businesses around Topeka, Kansas.</p>
-    </div>
-    <a class="scroll-cue" href="#gallery" aria-label="Scroll to gallery">
-      <span>Scroll</span><span class="arrow"></span>
-    </a>
-  </section>
-
-  <!-- Portraits -->
-  <section id="gallery">
-    <div class="wrap">
-      <p class="eyebrow">People</p>
-      <h2>Portraits</h2>
-      <div class="carousel" data-autoplay="4500">
-        <div class="track">
-          <div class="slide"><div class="frame"><img src="images/portrait-1.jpg" alt="Portrait photograph" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-2.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-3.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-4.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-5.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-6.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-7.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/portrait-8.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Nature & Landscapes -->
-  <section class="alt">
-    <div class="wrap">
-      <p class="eyebrow">Outdoors</p>
-      <h2>Nature &amp; Landscapes</h2>
-      <div class="carousel" data-autoplay="5000">
-        <div class="track">
-          <div class="slide"><div class="frame"><img src="images/nature-sunset-lake.jpg" alt="Sunset over the lake" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/nature-sunset-tree.jpg" alt="A tree silhouetted against the sunset" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/nature-snowy-forest.jpg" alt="Aerial drone view of a snowy forest" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/nature-crane.jpg" alt="A heron wading in the lake" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/nature-dam.jpg" alt="Water flowing over the dam" loading="lazy" /></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lifestyle -->
-  <section>
-    <div class="wrap">
-      <p class="eyebrow">Out and about</p>
-      <h2>Lifestyle</h2>
-      <div class="carousel" data-autoplay="5000">
-        <div class="track">
-          <div class="slide"><div class="frame"><img src="images/lifestyle-fishing.jpg" alt="Two friends heading out to fish" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/lifestyle-bmx.jpg" alt="A rider on a BMX bike at the skatepark" loading="lazy" /></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product -->
-  <section class="alt">
-    <div class="wrap">
-      <p class="eyebrow">Product</p>
-      <h2>Headphones</h2>
-      <div class="carousel" data-autoplay="4000">
-        <div class="track">
-          <div class="slide"><div class="frame"><img src="images/headphones-1.jpg" alt="Headphones product photograph" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/headphones-2.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/headphones-3.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/headphones-4.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-          <div class="slide"><div class="frame"><img src="images/headphones-5.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Automotive -->
-  <section>
-    <div class="wrap">
-      <p class="eyebrow">Automotive</p>
-      <h2>Cars</h2>
-      <div class="carousel">
-        <div class="track">
-          <div class="slide"><div class="frame"><img src="images/photo-mustang.jpg" alt="A black Mustang on the road at golden hour with its headlights on" /></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="wrap">
-      <p class="eyebrow">Pricing</p>
-      <h2>Fair prices, honest work.</h2>
-      <p class="lede" style="max-width:60ch;">Straightforward starting prices on the sessions and services I offer, kept competitive with other local photographers so you get more for your money.</p>
-
-      <div class="price-group">
-        <p class="eyebrow">Portrait Sessions</p>
-        <div class="price-cards">
-          <div class="price-card">
-            <h3>Quick Shoot</h3>
-            <p class="price"><strong>$99</strong></p>
-            <ul>
-              <li>20-minute session</li>
-              <li>One location</li>
-              <li>8 professionally edited digital images</li>
-              <li>Great for updated portraits, social media, couples, or a simple senior session</li>
-            </ul>
-          </div>
-          <div class="price-card">
-            <h3>Standard Session</h3>
-            <p class="price"><strong>$175</strong></p>
-            <ul>
-              <li>45-minute session</li>
-              <li>One location</li>
-              <li>15 professionally edited digital images</li>
-              <li>A great all-around option for portraits, couples, seniors, small families, or creative shoots</li>
-            </ul>
-          </div>
-          <div class="price-card feature">
-            <h3>Full Session</h3>
-            <p class="price"><strong>$249</strong></p>
-            <ul>
-              <li>Up to 75 minutes</li>
-              <li>Multiple poses and an optional outfit change</li>
-              <li>25 professionally edited digital images</li>
-              <li>Best for seniors, families, branding, automotive shoots, or anyone wanting more variety</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="price-group">
-        <p class="eyebrow">Commercial &amp; Events</p>
-        <div class="price-cards">
-          <div class="price-card">
-            <h3>Business &amp; Product Photography</h3>
-            <p class="price">Starting at <strong>$175</strong></p>
-            <ul>
-              <li>Local businesses and websites</li>
-              <li>Social media and product listings</li>
-              <li>Menus and promotional content</li>
-            </ul>
-          </div>
-          <div class="price-card">
-            <h3>Event Coverage</h3>
-            <p class="price"><strong>$100/hr</strong></p>
-            <ul>
-              <li>Small events, car meets, and parties</li>
-              <li>Business events and local gatherings</li>
-              <li>Two-hour minimum</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <p class="price-note"><strong>A note on pricing:</strong> all prices are starting points and can vary with location, group size, and how much editing you are after. Tell me what you have in mind and I will put together an exact quote before we shoot.</p>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="wrap" style="text-align:center;">
-      <h2>Have a shoot in mind?</h2>
-      <p class="lede" style="margin:0 auto 28px;">Products, cars, portraits, or something creative. Tell me what you are picturing.</p>
-      <a class="btn btn-primary" href="contact.html">Book a shoot</a>
-    </div>
-  </section>
-
-  <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
-
-  <script>
-    var hdr = document.getElementById('hdr');
-    function setHH(){ document.documentElement.style.setProperty('--hh', hdr.offsetHeight + 'px'); }
-    function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
-    setHH(); onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', setHH);
-    window.addEventListener('load', setHH);
-
-    function initCarousel(c){
-      var track = c.querySelector('.track');
-      var slides = c.querySelectorAll('.slide');
-      var n = slides.length;
-      if(n <= 1){ c.classList.add('single'); return; }
-      var dotsWrap = c.querySelector('.dots');
-      var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '5000', 10);
-      var dots = [];
-      for(var k = 0; k < n; k++){ (function(k){
-        var b = document.createElement('button');
-        b.addEventListener('click', function(){ go(k); reset(); });
-        dotsWrap.appendChild(b); dots.push(b);
-      })(k); }
-      function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
-        for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
-      function next(){ go(i + 1); }
-      function prev(){ go(i - 1); }
-      function start(){ timer = setInterval(next, delay); }
-      function stop(){ clearInterval(timer); }
-      function reset(){ stop(); start(); }
-      c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
-      c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
-      c.addEventListener('mouseenter', stop);
-      c.addEventListener('mouseleave', start);
-      var x0 = null;
-      c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
-      c.addEventListener('touchend', function(e){
-        if(x0 === null){ return; }
-        var dx = e.changedTouches[0].clientX - x0;
-        if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
-        x0 = null; start();
-      }, { passive: true });
-      go(0); start();
-    }
-    var carousels = document.querySelectorAll('.carousel');
-    for(var ci = 0; ci < carousels.length; ci++){ initCarousel(carousels[ci]); }
-  </script>
+<header class="site-header float" id="hdr">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="social-media.html">Social Media</a>
+<a href="photography.html" class="active">Photography</a>
+<a href="auto-detailing.html">Auto Detailing</a>
+<a href="partners.html">Partners</a>
+<a href="about.html">About</a>
+<a href="contact.html" class="nav-cta">Contact</a>
+<details class="nav-more">
+<summary>More</summary>
+<div class="more-menu">
+<a href="games.html">Games</a>
+</div>
+</details>
+</nav>
+</div>
+</header>
+<section class="photo-hero">
+<div class="bg"><img src="images/photo-lightning.jpg" alt="A lightning strike over a lake at dusk" /></div>
+<div class="ov"></div>
+<div class="inner">
+<p class="eyebrow reveal d1">Photography</p>
+<h1 class="reveal d2"><span>Chasing the</span><span class="em">good light.</span></h1>
+<p class="tagline reveal d3">Automotive, landscape, product, and creative photography for people and businesses around Topeka, Kansas.</p>
+</div>
+<a class="scroll-cue" href="#gallery" aria-label="Scroll to gallery">
+<span>Scroll</span><span class="arrow"></span>
+</a>
+</section>
+<!-- Portraits -->
+<section id="gallery">
+<div class="wrap">
+<p class="eyebrow">People</p>
+<h2>Portraits</h2>
+<div class="carousel" data-autoplay="4500">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/portrait-1.jpg" alt="Portrait photograph" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-2.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-3.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-4.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-5.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-6.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-7.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-8.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<!-- Nature & Landscapes -->
+<section class="alt">
+<div class="wrap">
+<p class="eyebrow">Outdoors</p>
+<h2>Nature &amp; Landscapes</h2>
+<div class="carousel" data-autoplay="5000">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/nature-sunset-lake.jpg" alt="Sunset over the lake" /></div></div>
+<div class="slide"><div class="frame"><img src="images/nature-sunset-tree.jpg" alt="A tree silhouetted against the sunset" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/nature-snowy-forest.jpg" alt="Aerial drone view of a snowy forest" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/nature-crane.jpg" alt="A heron wading in the lake" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/nature-dam.jpg" alt="Water flowing over the dam" loading="lazy" /></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<!-- Lifestyle -->
+<section>
+<div class="wrap">
+<p class="eyebrow">Out and about</p>
+<h2>Lifestyle</h2>
+<div class="carousel" data-autoplay="5000">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/lifestyle-fishing.jpg" alt="Two friends heading out to fish" /></div></div>
+<div class="slide"><div class="frame"><img src="images/lifestyle-bmx.jpg" alt="A rider on a BMX bike at the skatepark" loading="lazy" /></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<!-- Product -->
+<section class="alt">
+<div class="wrap">
+<p class="eyebrow">Product</p>
+<h2>Headphones</h2>
+<div class="carousel" data-autoplay="4000">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/headphones-1.jpg" alt="Headphones product photograph" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-2.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-3.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-4.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-5.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<!-- Automotive -->
+<section>
+<div class="wrap">
+<p class="eyebrow">Automotive</p>
+<h2>Cars</h2>
+<div class="carousel">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/photo-mustang.jpg" alt="A black Mustang on the road at golden hour with its headlights on" /></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<section id="pricing">
+<div class="wrap">
+<p class="eyebrow">Pricing</p>
+<h2>Fair prices, honest work.</h2>
+<p class="lede" style="max-width:60ch;">Straightforward starting prices on the sessions and services I offer, kept competitive with other local photographers so you get more for your money.</p>
+<div class="price-group">
+<p class="eyebrow">Portrait Sessions</p>
+<div class="price-cards">
+<div class="price-card">
+<h3>Quick Shoot</h3>
+<p class="price"><strong>$99</strong></p>
+<ul>
+<li>20-minute session</li>
+<li>One location</li>
+<li>8 professionally edited digital images</li>
+<li>Great for updated portraits, social media, couples, or a simple senior session</li>
+</ul>
+</div>
+<div class="price-card">
+<h3>Standard Session</h3>
+<p class="price"><strong>$175</strong></p>
+<ul>
+<li>45-minute session</li>
+<li>One location</li>
+<li>15 professionally edited digital images</li>
+<li>A great all-around option for portraits, couples, seniors, small families, or creative shoots</li>
+</ul>
+</div>
+<div class="price-card feature">
+<h3>Full Session</h3>
+<p class="price"><strong>$249</strong></p>
+<ul>
+<li>Up to 75 minutes</li>
+<li>Multiple poses and an optional outfit change</li>
+<li>25 professionally edited digital images</li>
+<li>Best for seniors, families, branding, automotive shoots, or anyone wanting more variety</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="price-group">
+<p class="eyebrow">Commercial &amp; Events</p>
+<div class="price-cards">
+<div class="price-card">
+<h3>Business &amp; Product Photography</h3>
+<p class="price">Starting at <strong>$175</strong></p>
+<ul>
+<li>Local businesses and websites</li>
+<li>Social media and product listings</li>
+<li>Menus and promotional content</li>
+</ul>
+</div>
+<div class="price-card">
+<h3>Event Coverage</h3>
+<p class="price"><strong>$100/hr</strong></p>
+<ul>
+<li>Small events, car meets, and parties</li>
+<li>Business events and local gatherings</li>
+<li>Two-hour minimum</li>
+</ul>
+</div>
+</div>
+</div>
+<p class="price-note"><strong>A note on pricing:</strong> all prices are starting points and can vary with location, group size, and how much editing you are after. Tell me what you have in mind and I will put together an exact quote before we shoot.</p>
+</div>
+</section>
+<section class="alt">
+<div class="wrap" style="text-align:center;">
+<h2>Have a shoot in mind?</h2>
+<p class="lede" style="margin:0 auto 28px;">Products, cars, portraits, or something creative. Tell me what you are picturing.</p>
+<a class="btn btn-primary" href="contact.html">Book a shoot</a>
+</div>
+</section>
+<footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+var hdr = document.getElementById('hdr');
+function setHH(){ document.documentElement.style.setProperty('--hh', hdr.offsetHeight + 'px'); }
+function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7); }
+setHH(); onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', setHH);
+window.addEventListener('load', setHH);
+function initCarousel(c){
+var track = c.querySelector('.track');
+var slides = c.querySelectorAll('.slide');
+var n = slides.length;
+if(n <= 1){ c.classList.add('single'); return; }
+var dotsWrap = c.querySelector('.dots');
+var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '5000', 10);
+var dots = [];
+for(var k = 0; k < n; k++){ (function(k){
+var b = document.createElement('button');
+b.addEventListener('click', function(){ go(k); reset(); });
+dotsWrap.appendChild(b); dots.push(b);
+})(k); }
+function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
+for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
+function next(){ go(i + 1); }
+function prev(){ go(i - 1); }
+function start(){ timer = setInterval(next, delay); }
+function stop(){ clearInterval(timer); }
+function reset(){ stop(); start(); }
+c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
+c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
+c.addEventListener('mouseenter', stop);
+c.addEventListener('mouseleave', start);
+var x0 = null;
+c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
+c.addEventListener('touchend', function(e){
+if(x0 === null){ return; }
+var dx = e.changedTouches[0].clientX - x0;
+if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
+x0 = null; start();
+}, { passive: true });
+go(0); start();
+}
+var carousels = document.querySelectorAll('.carousel');
+for(var ci = 0; ci < carousels.length; ci++){ initCarousel(carousels[ci]); }
+</script>
 </body>
 </html>
