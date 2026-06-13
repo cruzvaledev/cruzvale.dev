@@ -217,3 +217,23 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
   .photo-hero.shop .bg img { object-position:54% center; }
   .photo-hero.shop .scroll-cue { display:none; }
 }
+/* ============ Mobile: collapse nav to just the logo after the hero ============ */
+@media (max-width:680px){
+  /* nav can smoothly open/close */
+  .site-header .main-nav{
+    overflow:hidden;
+    max-height:140px;
+    opacity:1;
+    transition:max-height .35s ease, opacity .25s ease;
+  }
+  /* once scrolled past the hero → buttons gone, logo only */
+  .site-header.scrolled .main-nav{
+    max-height:0;
+    opacity:0;
+    pointer-events:none;
+  }
+  /* remove the leftover gap so the lone logo sits tight */
+  .site-header.scrolled .header-inner{
+    gap:0;
+  }
+}
