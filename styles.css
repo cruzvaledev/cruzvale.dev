@@ -307,3 +307,13 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
   /* let the dropdown show past the nav's clip while it is open */
   .site-header:not(.scrolled) .main-nav:has(.nav-more[open]){ overflow:visible; }
 }
+/* Frosted-glass dropdown (replaces the tan box) */
+.nav-more .more-menu{
+  background: rgba(24,20,15,0.46);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.30);
+}
+.nav-more .more-menu a{ color: rgba(255,255,255,0.92); }
+.nav-more .more-menu a:hover{ color: #fff; background: rgba(255,255,255,0.16); }
