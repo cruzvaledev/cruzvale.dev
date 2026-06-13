@@ -57,7 +57,7 @@ img { display:block; max-width:100%; }
 .header-inner { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
 .brand { font-family:var(--display); font-weight:600; font-size:22px; letter-spacing:-0.01em; }
 .brand-name img { display:block; width:auto; transition:filter .25s ease; }
-.brand img { display:block; height:100px; width:350px; object-fit:cover; object-position:center; filter:brightness(0); transition:filter .25s ease; }
+.brand img { display:block; height:100px; width:350px; object-fit:cover; object-position:center; filter:brightness(0) invert(0); transition:filter .25s ease; }
 .brand-name img { height:clamp(66px,9vw,112px); }
 @media (max-width:680px){ .brand img{ height:88px; width:308px; } .brand-name img{ height:54px; } }
 .main-nav { display:flex; align-items:center; gap:4px; font-size:14.5px; font-weight:500; flex-wrap:wrap; }
@@ -151,12 +151,14 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 /* ============ Full-bleed photo hero (photography page) ============ */
 .site-header.float { position:fixed; top:0; left:0; right:0; background:transparent; border-bottom:1px solid transparent; transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease; }
 .site-header.float .brand { color:#fff; }
+.site-header.float .brand img { filter:brightness(0) invert(1); }
 .site-header.float .main-nav a { color:rgba(255,255,255,0.9); }
 .site-header.float .main-nav a:hover, .site-header.float .main-nav a.active { color:#fff; background:rgba(255,255,255,0.16); }
 .site-header.float .main-nav .nav-cta { background:#fff; color:var(--ink); }
 .site-header.float .main-nav .nav-cta:hover { background:rgba(255,255,255,0.85); }
 .site-header.float.scrolled { background:rgba(244,238,226,0.95); backdrop-filter:blur(6px); border-bottom-color:var(--line-soft); }
 .site-header.float.scrolled .brand { color:var(--ink); }
+.site-header.float.scrolled .brand img { filter:brightness(0) invert(0); }
 .site-header.float.scrolled .main-nav a { color:var(--ink-soft); }
 .site-header.float.scrolled .main-nav a:hover, .site-header.float.scrolled .main-nav a.active { color:var(--ink); background:var(--paper-2); }
 .site-header.float.scrolled .main-nav .nav-cta { background:var(--ink); color:var(--paper); }
