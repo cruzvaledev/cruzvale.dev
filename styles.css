@@ -194,8 +194,8 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 .gallery-grid .tile.land .img { aspect-ratio:3/2; }
 
 /* ============ Landing nav matches the inner-page pill nav (white over photo) ============ */
-.landing-top .main-nav { justify-content:center; flex-wrap:wrap; gap:8px; margin-top:18px; }
-.landing-top .main-nav a { color:rgba(255,255,255,0.92); padding:9px 16px; }
+.landing-top .main-nav { justify-content:center; margin-top:10px; }
+.landing-top .main-nav a { color:rgba(255,255,255,0.92); }
 .landing-top .main-nav a:hover { color:#fff; background:rgba(255,255,255,0.16); }
 .landing-top .main-nav .nav-cta { background:#fff; color:var(--ink); }
 .landing-top .main-nav .nav-cta:hover { background:rgba(255,255,255,0.85); color:var(--ink); }
