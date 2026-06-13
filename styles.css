@@ -194,11 +194,15 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 .gallery-grid .tile.land .img { aspect-ratio:3/2; }
 
 /* ============ Landing nav matches the inner-page pill nav (white over photo) ============ */
-.landing-top .main-nav { justify-content:center; margin-top:10px; }
-.landing-top .main-nav a { color:rgba(255,255,255,0.92); }
+.landing-top .main-nav { display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:4px; margin-top:10px; }
+.landing-top .main-nav a { color:rgba(255,255,255,0.92); padding:8px 13px; font-size:14.5px; border-radius:999px; }
 .landing-top .main-nav a:hover { color:#fff; background:rgba(255,255,255,0.16); }
 .landing-top .main-nav .nav-cta { background:#fff; color:var(--ink); }
 .landing-top .main-nav .nav-cta:hover { background:rgba(255,255,255,0.85); color:var(--ink); }
+@media (max-width:680px){
+  .landing-top .main-nav { gap:6px; }
+  .landing-top .main-nav a { padding:7px 12px; font-size:13.5px; }
+}
 
 /* Smaller hero headline on phones so long words never clip at the edges */
 @media (max-width:680px){
