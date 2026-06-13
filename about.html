@@ -1,171 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="About Cruz Vale, a photographer and social media manager in Topeka, Kansas, with a deep technical background in computers, networking, and automotive work." />
-  <title>About | Cruz Vale</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="canonical" href="https://cruzvale.dev/about.html" />
-  <meta name="theme-color" content="#f4eee2" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="About | Cruz Vale" />
-  <meta property="og:description" content="About Cruz Vale, a photographer and social media manager in Topeka, Kansas, with a deep technical background in computers, networking, and automotive work." />
-  <meta property="og:image" content="https://cruzvale.dev/images/computer-black.jpg" />
-  <meta property="og:url" content="https://cruzvale.dev/about.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <style>
-    .review-carousel{position:relative;margin-top:36px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);}
-    .review-carousel .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-    .review-carousel .slide{min-width:100%;}
-    .review-card{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:56px 44px 64px;}
-    .review-card .stars{color:var(--rust);font-size:20px;letter-spacing:3px;}
-    .review-card .review-text{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(19px,2.4vw,26px);line-height:1.4;color:var(--ink);max-width:44ch;}
-    .review-card .review-by{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
-    .review-carousel .cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(34,29,22,.5);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s;}
-    .review-carousel .cbtn:hover{background:rgba(34,29,22,.8);}
-    .review-carousel .cprev{left:14px;}
-    .review-carousel .cnext{right:14px;}
-    .review-carousel .dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:8px;justify-content:center;z-index:2;}
-    .review-carousel .dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(34,29,22,.22);cursor:pointer;}
-    .review-carousel .dots button.active{background:var(--rust);}
-    .review-carousel.single .cbtn,.review-carousel.single .dots{display:none;}
-    @media (max-width:560px){ .review-card{padding:48px 28px 60px;min-height:340px;} .review-carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="About Cruz Vale, a photographer and social media manager in Topeka, Kansas, with a deep technical background in computers, networking, and automotive work." />
+<title>About | Cruz Vale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/about.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="About | Cruz Vale" />
+<meta property="og:description" content="About Cruz Vale, a photographer and social media manager in Topeka, Kansas, with a deep technical background in computers, networking, and automotive work." />
+<meta property="og:image" content="https://cruzvale.dev/images/computer-black.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/about.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+.review-carousel{position:relative;margin-top:36px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);}
+.review-carousel .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.review-carousel .slide{min-width:100%;}
+.review-card{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:56px 44px 64px;}
+.review-card .stars{color:var(--rust);font-size:20px;letter-spacing:3px;}
+.review-card .review-text{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(19px,2.4vw,26px);line-height:1.4;color:var(--ink);max-width:44ch;}
+.review-card .review-by{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+.review-carousel .cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(34,29,22,.5);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s;}
+.review-carousel .cbtn:hover{background:rgba(34,29,22,.8);}
+.review-carousel .cprev{left:14px;}
+.review-carousel .cnext{right:14px;}
+.review-carousel .dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:8px;justify-content:center;z-index:2;}
+.review-carousel .dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(34,29,22,.22);cursor:pointer;}
+.review-carousel .dots button.active{background:var(--rust);}
+.review-carousel.single .cbtn,.review-carousel.single .dots{display:none;}
+@media (max-width:560px){ .review-card{padding:48px 28px 60px;min-height:340px;} .review-carousel .cbtn{width:38px;height:38px;font-size:1.2rem;} }
+</style>
 </head>
 <body class="grain">
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
-      <nav class="main-nav" aria-label="Main">
-        <a href="social-media.html">Social Media</a>
-        <a href="photography.html">Photography</a>
-        <a href="auto-detailing.html">Auto Detailing</a>
-        <a href="partners.html">Partners</a>
-        <a href="about.html" class="active">About</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="page-title">
-    <div class="wrap">
-      <p class="eyebrow">About</p>
-      <h1>A creative eye with a technical background.</h1>
-      <p class="lede">I care about how things look and how well they actually work. That is the thread through everything I do.</p>
-    </div>
-  </section>
-
-  <section style="padding-top:8px;">
-    <div class="wrap">
-      <div class="split">
-        <div>
-          <p>These days most of my work is <strong>photography and social media</strong> for local businesses. I shoot product photos, portraits, and landscapes, and I create the kind of steady content that keeps a business looking active and professional online.</p>
-          <p>Before the camera, I spent <strong>over fifteen years around computers</strong>. I build and repair them, set up networks, and figure out the problems other people give up on. I trained at <strong>Washburn Tech in computer repair and networking</strong>.</p>
-          <p>I have also spent years building and maintaining my own cars, mostly <strong>1990s Hondas</strong>, and detailing them along the way. All of it comes back to the same thing: patience, attention to detail, and doing the job right the first time.</p>
-        </div>
-        <div class="duo" style="grid-template-columns:1fr 1fr; margin-top:0;">
-          <div class="tile port"><div class="img"><img src="images/computer-black.jpg" alt="A blacked out custom PC build with RGB lit fans" loading="lazy" /></div></div>
-          <div class="tile port"><div class="img"><img src="images/auto-motor.jpg" alt="A fully built Honda engine on a stand" loading="lazy" /></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="wrap">
-      <p class="eyebrow">Also in my toolkit</p>
-      <h2>Skills</h2>
-      <p class="lede">A hands on technical background I bring to every project, and that I am always happy to help with.</p>
-      <div class="skill-grid">
-        <div class="skill"><span class="k">Technology</span><h3>Computer Repair &amp; Custom Builds</h3><p>Diagnostics, hardware repair, upgrades, and custom PC builds from the ground up.</p></div>
-        <div class="skill"><span class="k">Technology</span><h3>Networking &amp; Servers</h3><p>Home and small business networks, wireless that reaches the whole place, and personal server setups.</p></div>
-        <div class="skill"><span class="k">Automotive</span><h3>Automotive Builds &amp; Maintenance</h3><p>Engine builds, repairs, and project work, with a soft spot for 90s Hondas.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="eyebrow">Experience</p>
-      <h2>Built by doing the work.</h2>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-label">Computers</div><h3>Over fifteen years working with computers</h3><p>Repairs, upgrades, builds, troubleshooting, software, and networking for myself, friends, family, and local clients.</p></div>
-        <div class="tl-item"><div class="tl-label">Education</div><h3>Washburn Tech, computer repair and networking</h3><p>Formal training that shaped how I approach diagnostics, repairs, and technical support.</p></div>
-        <div class="tl-item"><div class="tl-label">Automotive</div><h3>Personal car builds and maintenance</h3><p>Years of building, maintaining, and detailing my own cars, mostly 1990s Hondas.</p></div>
-        <div class="tl-item"><div class="tl-label">Creative</div><h3>Photography and social media for local businesses</h3><p>Shooting and running content for local pages, helping them stay consistent and look professional.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt" id="reviews">
-    <div class="wrap">
-      <p class="eyebrow">What clients say</p>
-      <h2>Recommended by the people I have worked with.</h2>
-      <p class="lede">Real feedback from clients on the computer builds, repairs, and upgrades I have done for them.</p>
-      <div class="review-carousel" data-autoplay="10000">
-        <div class="track">
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“He did a great job expanding the storage size of my PC by cloning the hard drive to a new, larger one and adding more RAM. Everything went smoothly and quickly.”</p><div class="review-by">Kim T.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Very well put together pc”</p><div class="review-by">Jaxon T.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“built me my first pc runs great”</p><div class="review-by">Johnathon M.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Amazing customer service. Knows what he’s saying and was kind enough to give us info for free and send possible replacement items too. 10/10”</p><div class="review-by">Ryanandkelsey H.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Kruzi was wonderful! Took his time to look over my computer, cleaning it up electronically and physically, while also improving air flow and increasing speed. I’ve definitely noticed a difference in game performance! I feel he really supports his customers and cares about what he does!”</p><div class="review-by">Alex T.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“I had a great experience. He had great communication, great prices, and very understanding. He even asked if I had questions about it and your rarely get that nowadays. I 10/10 recommend his products”</p><div class="review-by">Konner H.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Great service. Recently bought a computer from him and it’s done more than enough for my needs. Great deal for your money and service.”</p><div class="review-by">Marquis C.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Will be going to him for future pc needs! very helpful and insightful. Great guy! 100% recommend”</p><div class="review-by">Joshua S.</div></div></div>
-          <div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Bought a Pc from him runs nice looks amazing was very helpful with upgrade advice and services would recommend if on a budget and your looking for a good starter gaming PC.”</p><div class="review-by">Dominic S.</div></div></div>
-        </div>
-        <button class="cbtn cprev" aria-label="Previous review">&#8249;</button>
-        <button class="cbtn cnext" aria-label="Next review">&#8250;</button>
-        <div class="dots"></div>
-      </div>
-    </div>
-  </section>
-
-  <footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
-
-  <script>
-    (function(){
-      var c = document.querySelector('.review-carousel');
-      if(!c){ return; }
-      var track = c.querySelector('.track');
-      var slides = c.querySelectorAll('.slide');
-      var n = slides.length;
-      if(n <= 1){ c.classList.add('single'); return; }
-      var dotsWrap = c.querySelector('.dots');
-      var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '6000', 10);
-      var dots = [];
-      for(var k = 0; k < n; k++){ (function(k){
-        var b = document.createElement('button');
-        b.setAttribute('aria-label', 'Go to review ' + (k + 1));
-        b.addEventListener('click', function(){ go(k); reset(); });
-        dotsWrap.appendChild(b); dots.push(b);
-      })(k); }
-      function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
-        for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
-      function next(){ go(i + 1); }
-      function prev(){ go(i - 1); }
-      function start(){ timer = setInterval(next, delay); }
-      function stop(){ clearInterval(timer); }
-      function reset(){ stop(); start(); }
-      c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
-      c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
-      c.addEventListener('mouseenter', stop);
-      c.addEventListener('mouseleave', start);
-      var x0 = null;
-      c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
-      c.addEventListener('touchend', function(e){
-        if(x0 === null){ return; }
-        var dx = e.changedTouches[0].clientX - x0;
-        if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
-        x0 = null; start();
-      }, { passive: true });
-      go(0); start();
-    })();
-  </script>
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="social-media.html">Social Media</a>
+<a href="photography.html">Photography</a>
+<a href="auto-detailing.html">Auto Detailing</a>
+<a href="partners.html">Partners</a>
+<a href="about.html" class="active">About</a>
+<a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+</div>
+</header>
+<section class="page-title">
+<div class="wrap">
+<p class="eyebrow">About</p>
+<h1>A creative eye with a technical background.</h1>
+<p class="lede">I care about how things look and how well they actually work. That is the thread through everything I do.</p>
+</div>
+</section>
+<section style="padding-top:8px;">
+<div class="wrap">
+<div class="split">
+<div>
+<p>These days most of my work is <strong>photography and social media</strong> for local businesses. I shoot product photos, portraits, and landscapes, and I create the kind of steady content that keeps a business looking active and professional online.</p>
+<p>Before the camera, I spent <strong>over fifteen years around computers</strong>. I build and repair them, set up networks, and figure out the problems other people give up on. I trained at <strong>Washburn Tech in computer repair and networking</strong>.</p>
+<p>I have also spent years building and maintaining my own cars, mostly <strong>1990s Hondas</strong>, and detailing them along the way. All of it comes back to the same thing: patience, attention to detail, and doing the job right the first time.</p>
+</div>
+<div class="duo" style="grid-template-columns:1fr 1fr; margin-top:0;">
+<div class="tile port"><div class="img"><img src="images/computer-black.jpg" alt="A blacked out custom PC build with RGB lit fans" loading="lazy" /></div></div>
+<div class="tile port"><div class="img"><img src="images/auto-motor.jpg" alt="A fully built Honda engine on a stand" loading="lazy" /></div></div>
+</div>
+</div>
+</div>
+</section>
+<section class="alt">
+<div class="wrap">
+<p class="eyebrow">Also in my toolkit</p>
+<h2>Skills</h2>
+<p class="lede">A hands on technical background I bring to every project, and that I am always happy to help with.</p>
+<div class="skill-grid">
+<div class="skill"><span class="k">Technology</span><h3>Computer Repair &amp; Custom Builds</h3><p>Diagnostics, hardware repair, upgrades, and custom PC builds from the ground up.</p></div>
+<div class="skill"><span class="k">Technology</span><h3>Networking &amp; Servers</h3><p>Home and small business networks, wireless that reaches the whole place, and personal server setups.</p></div>
+<div class="skill"><span class="k">Automotive</span><h3>Automotive Builds &amp; Maintenance</h3><p>Engine builds, repairs, and project work, with a soft spot for 90s Hondas.</p></div>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="eyebrow">Experience</p>
+<h2>Built by doing the work.</h2>
+<div class="timeline">
+<div class="tl-item"><div class="tl-label">Computers</div><h3>Over fifteen years working with computers</h3><p>Repairs, upgrades, builds, troubleshooting, software, and networking for myself, friends, family, and local clients.</p></div>
+<div class="tl-item"><div class="tl-label">Education</div><h3>Washburn Tech, computer repair and networking</h3><p>Formal training that shaped how I approach diagnostics, repairs, and technical support.</p></div>
+<div class="tl-item"><div class="tl-label">Automotive</div><h3>Personal car builds and maintenance</h3><p>Years of building, maintaining, and detailing my own cars, mostly 1990s Hondas.</p></div>
+<div class="tl-item"><div class="tl-label">Creative</div><h3>Photography and social media for local businesses</h3><p>Shooting and running content for local pages, helping them stay consistent and look professional.</p></div>
+</div>
+</div>
+</section>
+<section class="alt" id="reviews">
+<div class="wrap">
+<p class="eyebrow">What clients say</p>
+<h2>Recommended by the people I have worked with.</h2>
+<p class="lede">Real feedback from clients on the computer builds, repairs, and upgrades I have done for them.</p>
+<div class="review-carousel" data-autoplay="10000">
+<div class="track">
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“He did a great job expanding the storage size of my PC by cloning the hard drive to a new, larger one and adding more RAM. Everything went smoothly and quickly.”</p><div class="review-by">Kim T.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Very well put together pc”</p><div class="review-by">Jaxon T.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“built me my first pc runs great”</p><div class="review-by">Johnathon M.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Amazing customer service. Knows what he’s saying and was kind enough to give us info for free and send possible replacement items too. 10/10”</p><div class="review-by">Ryanandkelsey H.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Kruzi was wonderful! Took his time to look over my computer, cleaning it up electronically and physically, while also improving air flow and increasing speed. I’ve definitely noticed a difference in game performance! I feel he really supports his customers and cares about what he does!”</p><div class="review-by">Alex T.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“I had a great experience. He had great communication, great prices, and very understanding. He even asked if I had questions about it and your rarely get that nowadays. I 10/10 recommend his products”</p><div class="review-by">Konner H.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Great service. Recently bought a computer from him and it’s done more than enough for my needs. Great deal for your money and service.”</p><div class="review-by">Marquis C.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Will be going to him for future pc needs! very helpful and insightful. Great guy! 100% recommend”</p><div class="review-by">Joshua S.</div></div></div>
+<div class="slide"><div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">“Bought a Pc from him runs nice looks amazing was very helpful with upgrade advice and services would recommend if on a budget and your looking for a good starter gaming PC.”</p><div class="review-by">Dominic S.</div></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous review">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next review">&#8250;</button>
+<div class="dots"></div>
+</div>
+</div>
+</section>
+<footer><div class="wrap"><p><strong>Cruz Vale</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+(function(){
+var c = document.querySelector('.review-carousel');
+if(!c){ return; }
+var track = c.querySelector('.track');
+var slides = c.querySelectorAll('.slide');
+var n = slides.length;
+if(n <= 1){ c.classList.add('single'); return; }
+var dotsWrap = c.querySelector('.dots');
+var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '6000', 10);
+var dots = [];
+for(var k = 0; k < n; k++){ (function(k){
+var b = document.createElement('button');
+b.setAttribute('aria-label', 'Go to review ' + (k + 1));
+b.addEventListener('click', function(){ go(k); reset(); });
+dotsWrap.appendChild(b); dots.push(b);
+})(k); }
+function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
+for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
+function next(){ go(i + 1); }
+function prev(){ go(i - 1); }
+function start(){ timer = setInterval(next, delay); }
+function stop(){ clearInterval(timer); }
+function reset(){ stop(); start(); }
+c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
+c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
+c.addEventListener('mouseenter', stop);
+c.addEventListener('mouseleave', start);
+var x0 = null;
+c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
+c.addEventListener('touchend', function(e){
+if(x0 === null){ return; }
+var dx = e.changedTouches[0].clientX - x0;
+if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
+x0 = null; start();
+}, { passive: true });
+go(0); start();
+})();
+</script>
+<script>
+(function(){
+var hdr = document.querySelector('.site-header');
+if(!hdr){ return; }
+function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 80); }
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
 </body>
 </html>
