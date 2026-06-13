@@ -237,3 +237,10 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
     gap:0;
   }
 }
+/* ============ Mobile fix: clear the FULL header without relying on JS-measured --hh ============ */
+@media (max-width:680px){
+  /* Fixed top padding sized to the expanded header (logo + two-row nav),
+     so scrolling back up can never let the header cover the hero text. */
+  .photo-hero .inner { padding:210px 24px 96px; }
+  .photo-hero.shop .inner { padding:200px 24px 20px; }
+}
