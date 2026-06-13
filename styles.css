@@ -244,3 +244,16 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
   .photo-hero .inner { padding:210px 24px 96px; }
   .photo-hero.shop .inner { padding:200px 24px 20px; }
 }
+/* ============ Mobile: trim pricing cards so a full card fits on screen ============ */
+@media (max-width:560px){
+  .price-cards .price-card{ padding:18px 20px 20px; }
+  .price-cards .price-card h3{ font-size:19px; }
+  .price-cards .price-card .price{ margin:2px 0 12px; }
+  .price-cards .price-card .price strong{ font-size:27px; }
+  .price-cards .price-card .desc{ font-size:13.5px; margin-bottom:10px; }
+  .price-cards .price-card ul{ gap:6px; }
+  .price-cards .price-card li{ font-size:14px; line-height:1.32; padding-left:20px; }
+  .price-cards .price-card li::before{ top:6px; width:8px; height:8px; }
+  .price-cards .price-card .best{ margin-top:9px; font-size:12.5px; }
+  #pricing .price-group{ margin-top:30px; }
+}
