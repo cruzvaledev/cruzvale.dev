@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://cruzvale.dev/" />
   <link rel="preload" as="image" href="images/auto-accord.jpg" />
@@ -45,7 +45,8 @@
   </script>
 
   <style>
-    /* Guaranteed: home-page nav buttons match the rest of the site */
+    /* Match the home nav to the inner pages: same width + same button sizing */
+    .landing-top { padding-left:0 !important; padding-right:0 !important; }
     .landing-top .main-nav { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:4px !important; margin-top:10px; }
     .landing-top .main-nav a { padding:8px 13px !important; font-size:14.5px !important; font-weight:500; border-radius:999px; color:rgba(255,255,255,0.92); }
     .landing-top .main-nav a:hover { color:#fff; background:rgba(255,255,255,0.16); }
