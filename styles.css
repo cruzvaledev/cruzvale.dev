@@ -36,7 +36,7 @@ img { display:block; max-width:100%; }
   background:linear-gradient(180deg, rgba(10,8,6,0.74) 0%, rgba(10,8,6,0.28) 26%, rgba(10,8,6,0.30) 52%, rgba(10,8,6,0.88) 100%); }
 .landing > .landing-top, .landing > .landing-hero { position:relative; z-index:2; }
 
-.landing-top { padding:30px 28px 0; text-align:center; }
+.landing-top { padding:30px 0 0; text-align:center; }
 .brand-name { font-family:var(--display); color:#fff; font-size:clamp(28px,4.4vw,42px); font-weight:600; letter-spacing:0.01em; display:inline-block; }
 .brand-name .reg { color:var(--rust-light); }
 .landing-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:18px; }
