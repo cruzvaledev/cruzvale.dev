@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Play 2048 by Vale &amp; Co — a warm, on-brand take on the classic tile-merging puzzle. Swipe or use WASD / arrow keys." />
+<title>2048 | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/2048.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="2048 | Vale &amp; Co" />
+<meta property="og:description" content="Play 2048 by Vale &amp; Co — a warm, on-brand take on the classic tile-merging puzzle. Swipe or use WASD / arrow keys." />
+<meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/2048.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+/* ===== 2048 ===== */
+.g2048{ max-width:480px; margin:0 auto; }
+.g2048-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; }
+.g2048-head h2{ font-size:38px; margin:0; line-height:1; }
+.g2048-scores{ display:flex; gap:10px; }
+.g2048-score{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:8px 16px; text-align:center; min-width:74px; }
+.g2048-score span{ display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
+.g2048-score strong{ font-family:var(--display); font-size:22px; font-weight:700; color:var(--ink); }
+.g2048-bar{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:14px; flex-wrap:wrap; }
+.g2048-hint{ color:var(--ink-soft); font-size:14px; margin:0; max-width:36ch; }
+.g2048-board{ display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); gap:10px; width:100%; max-width:440px; aspect-ratio:1/1; margin:18px auto 0; padding:10px; background:var(--paper-3); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); touch-action:none; outline:none; }
+.g-cell{ background:rgba(34,29,22,0.06); border-radius:var(--radius-sm); }
+.g-tile{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); font-family:var(--display); font-weight:700; line-height:1; font-size:clamp(20px,7vw,34px); color:var(--ink); }
+.g-tile.d3{ font-size:clamp(17px,5.6vw,28px); }
+.g-tile.d4{ font-size:clamp(14px,4.6vw,23px); }
+.t2{ background:var(--paper-2); }
+.t4{ background:var(--paper-3); }
+.t8{ background:#e8c8a8; }
+.t16{ background:#e8a06f; color:#fff; }
+.t32{ background:#e0784a; color:#fff; }
+.t64{ background:var(--rust); color:#fff; }
+.t128{ background:#a3431f; color:#fff; }
+.t256{ background:var(--rust-deep); color:#fff; }
+.t512{ background:#6f2c14; color:#fff; }
+.t1024{ background:#54200d; color:#fff; }
+.t2048{ background:var(--green); color:#fff; }
+.tsuper{ background:#2f5340; color:#fff; }
+.g2048-msg{ text-align:center; color:var(--rust-deep); font-weight:600; font-size:15px; min-height:20px; margin:14px 0 0; }
+@media (max-width:560px){ .g2048-head h2{ font-size:32px; } .g2048-board{ gap:8px; padding:8px; } }
+</style>
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="games.html">&larr; Back to Games</a>
+</nav>
+</div>
+</header>
+<section class="page-title">
+<div class="wrap" style="text-align:center;">
+<p class="eyebrow">Featured game</p>
+<h1>2048</h1>
+</div>
+</section>
+<section style="padding-top:8px;">
+<div class="wrap">
+<div class="g2048">
+<div class="g2048-head">
+<div>
+<p class="eyebrow" style="margin:0;">Tile puzzle</p>
+<h2>2048</h2>
+</div>
+<div class="g2048-scores">
+<div class="g2048-score"><span>Score</span><strong id="g-score">0</strong></div>
+<div class="g2048-score"><span>Best</span><strong id="g-best">0</strong></div>
+</div>
+</div>
+<div class="g2048-bar">
+<p class="g2048-hint">Swipe, or use WASD / arrow keys. Merge matching tiles to reach 2048.</p>
+<button type="button" class="btn btn-primary" id="g-new">New game</button>
+</div>
+<div class="g2048-board" id="g-board" tabindex="0" role="application" aria-label="2048 game board"></div>
+<p class="g2048-msg" id="g-msg" role="status" aria-live="polite"></p>
+</div>
+</div>
+</section>
+<footer><div class="wrap"><p><strong>Vale &amp; Co</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+(function(){
+var SIZE = 4, BEST_KEY = 'vco2048best';
+var boardEl = document.getElementById('g-board');
+var scoreEl = document.getElementById('g-score');
+var bestEl = document.getElementById('g-best');
+var msgEl = document.getElementById('g-msg');
+if(!boardEl){ return; }
+var grid, score, best, over, won;
+
+best = parseInt(localStorage.getItem(BEST_KEY) || '0', 10) || 0;
+
+function empty(){ var g = []; for(var i=0;i<SIZE;i++){ g.push([0,0,0,0]); } return g; }
+function emptyCells(){ var c=[]; for(var i=0;i<SIZE;i++){ for(var j=0;j<SIZE;j++){ if(!grid[i][j]) c.push([i,j]); } } return c; }
+function addRandom(){ var c=emptyCells(); if(!c.length){ return; } var p=c[Math.floor(Math.random()*c.length)]; grid[p[0]][p[1]] = Math.random()<0.9 ? 2 : 4; }
+function hasValue(v){ for(var i=0;i<SIZE;i++){ for(var j=0;j<SIZE;j++){ if(grid[i][j]===v) return true; } } return false; }
+
+function slide(row){
+  var arr = row.filter(function(v){ return v; });
+  var gained = 0;
+  for(var i=0;i<arr.length-1;i++){ if(arr[i]===arr[i+1]){ arr[i]*=2; gained+=arr[i]; arr.splice(i+1,1); } }
+  while(arr.length<SIZE){ arr.push(0); }
+  var changed = false;
+  for(var j=0;j<SIZE;j++){ if(arr[j]!==row[j]){ changed=true; break; } }
+  return { row:arr, gained:gained, changed:changed };
+}
+function toRows(dir){
+  var rows=[];
+  for(var i=0;i<SIZE;i++){ var row=[];
+    for(var j=0;j<SIZE;j++){
+      if(dir==='left') row.push(grid[i][j]);
+      else if(dir==='right') row.push(grid[i][SIZE-1-j]);
+      else if(dir==='up') row.push(grid[j][i]);
+      else row.push(grid[SIZE-1-j][i]);
+    } rows.push(row);
+  } return rows;
+}
+function fromRows(rows,dir){
+  var g=empty();
+  for(var i=0;i<SIZE;i++){ for(var j=0;j<SIZE;j++){ var v=rows[i][j];
+    if(dir==='left') g[i][j]=v;
+    else if(dir==='right') g[i][SIZE-1-j]=v;
+    else if(dir==='up') g[j][i]=v;
+    else g[SIZE-1-j][i]=v;
+  } } return g;
+}
+function movesAvailable(){
+  if(emptyCells().length) return true;
+  for(var i=0;i<SIZE;i++){ for(var j=0;j<SIZE;j++){
+    if(j<SIZE-1 && grid[i][j]===grid[i][j+1]) return true;
+    if(i<SIZE-1 && grid[i][j]===grid[i+1][j]) return true;
+  } } return false;
+}
+function move(dir){
+  if(over){ return; }
+  var rows = toRows(dir), moved=false, gained=0, out=[];
+  for(var i=0;i<rows.length;i++){ var r=slide(rows[i]); gained+=r.gained; if(r.changed) moved=true; out.push(r.row); }
+  if(!moved){ return; }
+  grid = fromRows(out, dir);
+  score += gained;
+  if(score>best){ best=score; try{ localStorage.setItem(BEST_KEY, best); }catch(e){} }
+  addRandom();
+  render();
+  if(!won && hasValue(2048)){ won=true; msgEl.textContent='You reached 2048 — keep going!'; }
+  else if(!movesAvailable()){ over=true; msgEl.textContent='No moves left — game over.'; }
+}
+function render(){
+  boardEl.innerHTML='';
+  for(var i=0;i<SIZE;i++){ for(var j=0;j<SIZE;j++){
+    var v=grid[i][j];
+    var cell=document.createElement('div'); cell.className='g-cell';
+    if(v){ var t=document.createElement('div'); t.className='g-tile t'+(v<=2048?v:'super')+' d'+(''+v).length; t.textContent=v; cell.appendChild(t); }
+    boardEl.appendChild(cell);
+  } }
+  scoreEl.textContent=score; bestEl.textContent=best;
+}
+function newGame(){ grid=empty(); score=0; over=false; won=false; msgEl.textContent=''; addRandom(); addRandom(); render(); }
+
+var KEYS={ arrowup:'up', w:'up', arrowdown:'down', s:'down', arrowleft:'left', a:'left', arrowright:'right', d:'right' };
+document.addEventListener('keydown', function(e){
+  var dir=KEYS[(e.key||'').toLowerCase()];
+  if(!dir) return;
+  var tag=(e.target && e.target.tagName) || '';
+  if(/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+  e.preventDefault();
+  move(dir);
+});
+var sx=null, sy=null;
+boardEl.addEventListener('touchstart', function(e){ var t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY; }, { passive:true });
+boardEl.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive:false });
+boardEl.addEventListener('touchend', function(e){
+  if(sx===null) return;
+  var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy, ax=Math.abs(dx), ay=Math.abs(dy);
+  if(Math.max(ax,ay)>=24){ if(ax>ay) move(dx>0?'right':'left'); else move(dy>0?'down':'up'); }
+  sx=sy=null;
+}, { passive:false });
+document.getElementById('g-new').addEventListener('click', newGame);
+
+newGame();
+})();
+</script>
+</body>
+</html>
