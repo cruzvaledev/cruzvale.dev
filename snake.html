@@ -44,7 +44,7 @@ body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:999
 /* Play area fills remaining height, centers the game */
 .play{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:14px 16px calc(16px + env(safe-area-inset-bottom)); }
 .game{ width:100%; max-width:440px; display:flex; flex-direction:column; gap:12px; }
-.game-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.game-top{ display:flex; align-items:center; justify-content:center; gap:12px; }
 .scores{ display:flex; gap:10px; }
 .score{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:6px 14px; text-align:center; min-width:66px; }
 .score span{ display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
@@ -84,7 +84,6 @@ body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:999
 <div class="score"><span>Score</span><strong id="s-score">0</strong></div>
 <div class="score"><span>Best</span><strong id="s-best">0</strong></div>
 </div>
-<button type="button" class="btn btn-primary" id="s-new">New game</button>
 </div>
 <div class="board-wrap">
 <canvas class="s-board" id="s-board" width="450" height="450" tabindex="0" role="application" aria-label="Snake game board"></canvas>
@@ -170,7 +169,6 @@ canvas.addEventListener('touchend', function(e){
   sx=sy=null;
 }, { passive:false });
 overlay.addEventListener('click', begin);
-document.getElementById('s-new').addEventListener('click', begin);
 
 idle();
 })();
