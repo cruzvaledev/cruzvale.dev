@@ -317,3 +317,9 @@ footer strong { color:var(--ink); font-weight:600; font-family:var(--display); }
 }
 .nav-more .more-menu a{ color: rgba(255,255,255,0.92); }
 .nav-more .more-menu a:hover{ color: #fff; background: rgba(255,255,255,0.16); }
+/* ===== Homepage header: match the compact height of the other pages ===== */
+.landing-top{ padding-top:10px; }
+.landing-top .main-nav{ margin-top:8px; }
+@media (max-width:680px){
+  .landing-top{ padding-top:6px; }
+}
