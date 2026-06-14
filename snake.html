@@ -51,7 +51,13 @@ body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:999
 .score strong{ font-family:var(--display); font-size:20px; font-weight:700; color:var(--ink); }
 
 /* Board sizes from the SMALLER of available width and height, stays square */
-.s-board{ width:min(92vw, calc(100vh - 230px), 440px); width:min(92vw, calc(100dvh - 230px), 440px); height:auto; aspect-ratio:1/1; margin:0 auto; display:block; background:var(--paper-3); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); touch-action:none; outline:none; }
+.board-wrap{ position:relative; width:min(96vw, calc(100vh - 200px), 480px); width:min(96vw, calc(100dvh - 200px), 480px); margin:0 auto; }
+.s-board{ width:100%; height:auto; aspect-ratio:1/1; display:block; background:var(--paper-3); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); touch-action:none; outline:none; }
+.s-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:var(--radius); background:rgba(244,238,226,0.86); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); text-align:center; padding:20px; cursor:pointer; }
+.s-overlay[hidden]{ display:none; }
+.s-overlay-card{ display:flex; flex-direction:column; align-items:center; gap:14px; }
+.s-overlay h2{ font-family:var(--display); font-weight:600; font-size:clamp(30px,8vw,44px); margin:0; line-height:1; }
+.ov-text{ color:var(--ink-soft); font-size:14.5px; margin:0; max-width:26ch; }
 .foot{ text-align:center; margin:0; min-height:18px; font-size:13.5px; line-height:1.3; }
 .hint{ color:var(--ink-soft); }
 .msg{ color:var(--rust-deep); font-weight:600; margin-left:6px; }
@@ -80,19 +86,29 @@ body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:999
 </div>
 <button type="button" class="btn btn-primary" id="s-new">New game</button>
 </div>
-<canvas class="s-board" id="s-board" width="400" height="400" tabindex="0" role="application" aria-label="Snake game board"></canvas>
+<div class="board-wrap">
+<canvas class="s-board" id="s-board" width="450" height="450" tabindex="0" role="application" aria-label="Snake game board"></canvas>
+<div class="s-overlay" id="s-overlay">
+<div class="s-overlay-card">
+<h2 id="ov-title">Snake</h2>
+<p class="ov-text" id="ov-text">Swipe or use WASD / arrow keys.</p>
+<button type="button" class="btn btn-primary" id="ov-btn">Start</button>
+</div>
+</div>
+</div>
 <p class="foot"><span class="hint">Swipe or use WASD / arrow keys.</span><span class="msg" id="s-msg" role="status" aria-live="polite"></span></p>
 </div>
 </main>
 <script>
 (function(){
-var GRID=20, CELL=20;
+var GRID=15, CELL=30;
 var canvas=document.getElementById('s-board');
 if(!canvas){ return; }
 var ctx=canvas.getContext('2d');
-var scoreEl=document.getElementById('s-score'), bestEl=document.getElementById('s-best'), msgEl=document.getElementById('s-msg');
+var scoreEl=document.getElementById('s-score'), bestEl=document.getElementById('s-best');
+var overlay=document.getElementById('s-overlay'), ovTitle=document.getElementById('ov-title'), ovText=document.getElementById('ov-text'), ovBtn=document.getElementById('ov-btn');
 var BEST_KEY='vcoSnakeBest';
-var snake, dir, nextDir, food, score, best, alive, timer;
+var snake, dir, nextDir, food, score, best, alive, running, timer;
 best=parseInt(localStorage.getItem(BEST_KEY)||'0',10)||0;
 
 function cssVar(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
@@ -102,15 +118,19 @@ function onSnake(x,y){ for(var i=0;i<snake.length;i++){ if(snake[i].x===x&&snake
 function hitsBody(h,ignoreTail){ var n=ignoreTail?snake.length-1:snake.length; for(var i=0;i<n;i++){ if(snake[i].x===h.x&&snake[i].y===h.y) return true; } return false; }
 function placeFood(){ do { food={ x:Math.floor(Math.random()*GRID), y:Math.floor(Math.random()*GRID) }; } while(onSnake(food.x,food.y)); }
 function updateScores(){ scoreEl.textContent=score; bestEl.textContent=best; }
-function speed(){ return Math.max(70, 140 - Math.floor(score/4)*8); }
+function speed(){ return Math.max(105, 195 - Math.floor(score/5)*6); }
 function schedule(){ clearTimeout(timer); if(alive){ timer=setTimeout(tick, speed()); } }
 
-function reset(){
-  snake=[{x:9,y:10},{x:8,y:10},{x:7,y:10}];
+function showOverlay(t,txt,btn){ ovTitle.textContent=t; ovText.textContent=txt; ovBtn.textContent=btn; overlay.hidden=false; }
+function hideOverlay(){ overlay.hidden=true; }
+function setup(){
+  var mid=Math.floor(GRID/2);
+  snake=[{x:mid,y:mid},{x:mid-1,y:mid},{x:mid-2,y:mid}];
   dir={x:1,y:0}; nextDir={x:1,y:0};
-  score=0; alive=true; msgEl.textContent='';
-  placeFood(); updateScores(); draw(); schedule();
+  score=0; alive=false; placeFood(); updateScores(); draw();
 }
+function idle(){ clearTimeout(timer); running=false; setup(); showOverlay('Snake','Swipe or use WASD / arrow keys.','Start'); }
+function begin(){ clearTimeout(timer); setup(); alive=true; running=true; hideOverlay(); schedule(); }
 function tick(){
   dir=nextDir;
   var head={ x:snake[0].x+dir.x, y:snake[0].y+dir.y };
@@ -121,7 +141,7 @@ function tick(){
   else { snake.pop(); }
   updateScores(); draw(); schedule();
 }
-function gameOver(){ alive=false; clearTimeout(timer); msgEl.textContent=' Game over — press New game.'; }
+function gameOver(){ alive=false; running=false; clearTimeout(timer); showOverlay('Game over','Score: '+score,'Play again'); }
 
 function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 function drawCell(x,y,color){ var pad=2, r=4, s=CELL-pad*2; ctx.fillStyle=color; roundRect(x*CELL+pad, y*CELL+pad, s, s, r); ctx.fill(); }
@@ -136,7 +156,9 @@ var KEYS={ arrowup:[0,-1], w:[0,-1], arrowdown:[0,1], s:[0,1], arrowleft:[-1,0],
 document.addEventListener('keydown', function(e){
   var k=KEYS[(e.key||'').toLowerCase()]; if(!k) return;
   var tag=(e.target&&e.target.tagName)||''; if(/INPUT|TEXTAREA|SELECT/.test(tag)) return;
-  e.preventDefault(); setDir(k[0],k[1]);
+  e.preventDefault();
+  if(!running){ begin(); }
+  setDir(k[0],k[1]);
 });
 var sx=null, sy=null;
 canvas.addEventListener('touchstart', function(e){ var t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY; }, { passive:true });
@@ -144,12 +166,13 @@ canvas.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passi
 canvas.addEventListener('touchend', function(e){
   if(sx===null) return;
   var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy, ax=Math.abs(dx), ay=Math.abs(dy);
-  if(Math.max(ax,ay)>=20){ if(ax>ay) setDir(dx>0?1:-1,0); else setDir(0,dy>0?1:-1); }
+  if(Math.max(ax,ay)>=20){ if(!running){ begin(); } if(ax>ay) setDir(dx>0?1:-1,0); else setDir(0,dy>0?1:-1); }
   sx=sy=null;
 }, { passive:false });
-document.getElementById('s-new').addEventListener('click', reset);
+overlay.addEventListener('click', begin);
+document.getElementById('s-new').addEventListener('click', begin);
 
-reset();
+idle();
 })();
 </script>
 <script>
