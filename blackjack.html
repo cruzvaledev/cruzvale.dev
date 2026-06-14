@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Play Blackjack by Vale &amp; Co — bet your chips, hit, stand, or double against the dealer. A warm, on-brand table." />
+<title>Blackjack | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/blackjack.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Blackjack | Vale &amp; Co" />
+<meta property="og:description" content="Play Blackjack by Vale &amp; Co — bet your chips, hit, stand, or double against the dealer. A warm, on-brand table." />
+<meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/blackjack.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+html, body{ overscroll-behavior:none; }
+body{ margin:0; min-height:100dvh; }
+.site-header{ position:static; flex:0 0 auto; }
+.header-inner{ padding:8px 0; }
+.site-header .brand img{ height:40px; width:auto; object-fit:contain; }
+.site-header .main-nav{ display:flex; align-items:center; gap:8px; }
+@media (max-width:680px){ .site-header .header-inner{ flex-direction:row; gap:10px; padding:8px 0; } .site-header .brand img{ height:34px; } }
+.fs-btn{ display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--ink-soft); cursor:pointer; transition:color .18s ease, background .18s ease, border-color .18s ease; }
+.fs-btn:hover{ color:var(--ink); border-color:var(--ink); background:var(--paper-2); }
+.fs-btn svg{ width:18px; height:18px; display:block; }
+.fs-btn .fs-exit{ display:none; }
+body.is-fs .fs-btn .fs-enter{ display:none; }
+body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
+body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:9999; overflow:auto; background:var(--paper); }
+
+.bj{ --cw:clamp(48px,13vw,78px); max-width:680px; margin:0 auto; padding:8px 16px calc(20px + env(safe-area-inset-bottom)); }
+.bj-top{ display:flex; gap:10px; justify-content:center; margin-bottom:10px; }
+.bj-top .stat{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:6px 16px; text-align:center; min-width:78px; }
+.bj-top .stat span{ display:block; font-size:10.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
+.bj-top .stat strong{ font-family:var(--display); font-size:20px; font-weight:700; color:var(--ink); }
+.hand-label{ font-size:13px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink-soft); margin:14px 0 8px; text-align:center; }
+.hand-label b{ font-family:var(--display); color:var(--rust); margin-left:6px; }
+.hand{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; min-height:calc(var(--cw) * 1.42); }
+.card{ width:var(--cw); height:calc(var(--cw) * 1.42); border-radius:calc(var(--cw) * 0.12); box-sizing:border-box; position:relative; }
+.card.up{ background:#fbf6ec; border:1px solid var(--line); box-shadow:0 1px 2px rgba(34,29,22,0.12); }
+.card.down{ background:var(--rust); border:1px solid var(--rust-deep); background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.12) 0 3px, transparent 3px 8px); box-shadow:0 1px 2px rgba(34,29,22,0.12); }
+.card.red{ color:#bd3b2a; }
+.card.black{ color:#26201a; }
+.card .cr{ position:absolute; top:3%; left:8%; font-family:var(--display); font-weight:700; font-size:calc(var(--cw) * 0.42); line-height:1; }
+.card .cs{ position:absolute; top:37%; left:9%; font-size:calc(var(--cw) * 0.27); line-height:1; }
+.card .cc{ position:absolute; left:50%; top:54%; transform:translate(-50%,-50%); font-size:calc(var(--cw) * 0.62); }
+.result{ text-align:center; min-height:24px; margin:12px 0 4px; font-family:var(--display); font-size:19px; font-weight:600; color:var(--rust-deep); }
+.controls{ margin-top:8px; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.bet-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; }
+.bet-row .betval{ font-size:15px; color:var(--ink-soft); }
+.bet-row .betval strong{ font-family:var(--display); font-size:20px; color:var(--ink); }
+.chip{ border:1px solid var(--line); background:var(--paper); color:var(--ink); border-radius:999px; padding:8px 14px; font-weight:600; font-size:14px; cursor:pointer; font-family:var(--body); transition:background .15s ease, border-color .15s ease; }
+.chip:hover{ background:var(--paper-2); border-color:var(--ink); }
+.action-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.action-row .btn{ min-width:88px; justify-content:center; }
+[hidden]{ display:none !important; }
+</style>
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="games.html">&larr; Back to Games</a>
+<button id="fs-btn" class="fs-btn" type="button" title="Fullscreen" aria-label="Toggle fullscreen" aria-pressed="false">
+<span class="fs-ic fs-enter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5"/></svg></span>
+<span class="fs-ic fs-exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h5V3M21 8h-5V3M21 16h-5v5M3 16h5v5"/></svg></span>
+</button>
+</nav>
+</div>
+</header>
+<main class="play bj">
+<div class="bj-top">
+<div class="stat"><span>Chips</span><strong id="chips">500</strong></div>
+<div class="stat"><span>Best</span><strong id="best">500</strong></div>
+</div>
+<div class="hand-label">Dealer <b id="d-total"></b></div>
+<div class="hand" id="dealer"></div>
+<div class="result" id="result"></div>
+<div class="hand-label">You <b id="p-total"></b></div>
+<div class="hand" id="player"></div>
+<div class="controls">
+<div class="bet-row" id="bet-row">
+<span class="betval">Bet: <strong id="bet">0</strong></span>
+<button type="button" class="chip" data-add="5">+5</button>
+<button type="button" class="chip" data-add="25">+25</button>
+<button type="button" class="chip" data-add="100">+100</button>
+<button type="button" class="chip" id="bet-max">Max</button>
+<button type="button" class="chip" id="bet-clear">Clear</button>
+</div>
+<div class="action-row" id="action-row">
+<button type="button" class="btn btn-primary" id="deal">Deal</button>
+<button type="button" class="btn btn-primary" id="hit" hidden>Hit</button>
+<button type="button" class="btn btn-ghost" id="stand" hidden>Stand</button>
+<button type="button" class="btn btn-ghost" id="double" hidden>Double</button>
+<button type="button" class="btn btn-primary" id="reset" hidden>Reset to 500</button>
+</div>
+</div>
+</main>
+<script>
+(function(){
+var SUITS=['♠','♥','♦','♣'];
+function color(s){ return (s===1||s===2)?'red':'black'; }
+function rankStr(r){ return r===1?'A':r===11?'J':r===12?'Q':r===13?'K':(''+r); }
+
+/* ---- core rule helpers (mirrored in the Node check) ---- */
+function cardValue(r){ return r===1?11 : (r>=10?10:r); }
+function handValue(hand){ var total=0, aces=0; for(var i=0;i<hand.length;i++){ var r=hand[i].r; total+=cardValue(r); if(r===1) aces++; } while(total>21 && aces>0){ total-=10; aces--; } return total; }
+function isBlackjack(hand){ return hand.length===2 && handValue(hand)===21; }
+function dealerShouldDraw(value){ return value<17; } /* stand on all 17s */
+
+/* ---- state ---- */
+var CHIPS_KEY='vcoBlackjackChips', BEST_KEY='vcoBlackjackBest';
+function loadNum(key, def){ var v=parseInt(localStorage.getItem(key),10); return isFinite(v)?v:def; }
+var chips=loadNum(CHIPS_KEY, 500); if(chips<0) chips=0;
+var best=loadNum(BEST_KEY, Math.max(500, chips));
+var deck=[], player=[], dealer=[], bet=Math.min(25, chips), curBet=0, phase='bet', revealed=false, result='';
+
+var chipsEl=document.getElementById('chips'), bestEl=document.getElementById('best'), betEl=document.getElementById('bet');
+var dealerEl=document.getElementById('dealer'), playerEl=document.getElementById('player');
+var dTotalEl=document.getElementById('d-total'), pTotalEl=document.getElementById('p-total'), resultEl=document.getElementById('result');
+var betRow=document.getElementById('bet-row');
+var dealBtn=document.getElementById('deal'), hitBtn=document.getElementById('hit'), standBtn=document.getElementById('stand'), dblBtn=document.getElementById('double'), resetBtn=document.getElementById('reset');
+
+function makeDeck(){ var d=[]; for(var s=0;s<4;s++){ for(var r=1;r<=13;r++){ d.push({s:s,r:r}); } } return d; }
+function shuffle(d){ for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+function draw(){ if(!deck.length){ deck=shuffle(makeDeck()); } return deck.pop(); }
+function saveChips(){ try{ localStorage.setItem(CHIPS_KEY, chips); }catch(e){} }
+function saveBest(){ try{ localStorage.setItem(BEST_KEY, best); }catch(e){} }
+
+function deal(){
+  if(bet<=0) return; if(bet>chips){ bet=chips; }
+  curBet=bet; deck=shuffle(makeDeck());
+  player=[draw(), draw()]; dealer=[draw(), draw()];
+  revealed=false; result='';
+  var pBJ=isBlackjack(player), dBJ=isBlackjack(dealer);
+  if(pBJ || dBJ){ revealed=true; if(pBJ && dBJ){ settle('push'); } else if(pBJ){ settle('bj'); } else { settle('lose'); } }
+  else { phase='player'; }
+  render();
+}
+function hit(){ if(phase!=='player') return; player.push(draw()); if(handValue(player)>21){ revealed=true; settle('lose'); } render(); }
+function stand(){ if(phase!=='player') return; revealed=true; dealerPlay(); render(); }
+function doubleDown(){ if(phase!=='player' || player.length!==2) return; if(chips < curBet*2) return; curBet*=2; player.push(draw()); revealed=true; if(handValue(player)>21){ settle('lose'); } else { dealerPlay(); } render(); }
+function dealerPlay(){
+  while(dealerShouldDraw(handValue(dealer))){ dealer.push(draw()); }
+  var pv=handValue(player), dv=handValue(dealer);
+  if(dv>21){ settle('win'); } else if(pv>dv){ settle('win'); } else if(pv<dv){ settle('lose'); } else { settle('push'); }
+}
+function settle(outcome){
+  var msg='';
+  if(outcome==='win'){ chips+=curBet; msg=(handValue(dealer)>21)?'Dealer busts — you win!':'You win!'; }
+  else if(outcome==='bj'){ chips+=Math.floor(curBet*1.5); msg='Blackjack! Pays 3:2.'; }
+  else if(outcome==='push'){ msg='Push — bet returned.'; }
+  else { chips-=curBet; msg=(handValue(player)>21)?'Bust — you lose.':(isBlackjack(dealer)?'Dealer blackjack.':'Dealer wins.'); }
+  if(chips<0) chips=0;
+  saveChips(); if(chips>best){ best=chips; saveBest(); }
+  result=msg; phase=(chips>0)?'bet':'broke';
+  if(bet>chips) bet=chips;
+}
+
+function faceEl(card){ var el=document.createElement('div'); el.className='card up '+color(card.s); el.innerHTML='<span class="cr">'+rankStr(card.r)+'</span><span class="cs">'+SUITS[card.s]+'</span><span class="cc">'+SUITS[card.s]+'</span>'; return el; }
+function backEl(){ var el=document.createElement('div'); el.className='card down'; return el; }
+function renderHand(el, hand, hideSecond){ el.innerHTML=''; for(var i=0;i<hand.length;i++){ el.appendChild((hideSecond && i===1)?backEl():faceEl(hand[i])); } }
+
+function render(){
+  chipsEl.textContent=chips; bestEl.textContent=best; betEl.textContent=bet;
+  renderHand(playerEl, player, false);
+  renderHand(dealerEl, dealer, !revealed && dealer.length>0);
+  pTotalEl.textContent = player.length ? handValue(player) : '';
+  dTotalEl.textContent = dealer.length ? (revealed ? handValue(dealer) : '?') : '';
+  resultEl.textContent = result;
+  var betting = (phase==='bet');
+  betRow.hidden = !betting;
+  dealBtn.hidden = !(betting && chips>0 && bet>0);
+  hitBtn.hidden = (phase!=='player');
+  standBtn.hidden = (phase!=='player');
+  dblBtn.hidden = !(phase==='player' && player.length===2 && chips>=curBet*2);
+  resetBtn.hidden = (phase!=='broke');
+}
+
+/* bet controls */
+betRow.addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(!b || phase!=='bet') return;
+  if(b.dataset.add){ bet=Math.min(chips, bet+parseInt(b.dataset.add,10)); }
+  else if(b.id==='bet-max'){ bet=chips; }
+  else if(b.id==='bet-clear'){ bet=0; }
+  render();
+});
+dealBtn.addEventListener('click', deal);
+hitBtn.addEventListener('click', hit);
+standBtn.addEventListener('click', stand);
+dblBtn.addEventListener('click', doubleDown);
+resetBtn.addEventListener('click', function(){ chips=500; bet=Math.min(25,chips); saveChips(); if(chips>best){ best=chips; saveBest(); } result=''; phase='bet'; render(); });
+
+render();
+})();
+</script>
+<script>
+(function(){
+var btn=document.getElementById('fs-btn'); if(!btn){ return; }
+var docEl=document.documentElement;
+function supported(){ return !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen); }
+function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+function setState(on){ document.body.classList.toggle('is-fs', on); btn.setAttribute('aria-pressed', on?'true':'false'); btn.title = on?'Exit fullscreen':'Fullscreen'; }
+btn.addEventListener('click', function(){
+  if(supported()){
+    if(fsEl()){ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+    else { (docEl.requestFullscreen||docEl.webkitRequestFullscreen).call(docEl); }
+  } else { var on=!document.body.classList.contains('pseudo-fs'); document.body.classList.toggle('pseudo-fs', on); setState(on); }
+});
+function onChange(){ if(supported()){ setState(!!fsEl()); } }
+document.addEventListener('fullscreenchange', onChange);
+document.addEventListener('webkitfullscreenchange', onChange);
+})();
+</script>
+</body>
+</html>
