@@ -44,7 +44,7 @@ body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:999
 /* Play area fills remaining height, centers the game */
 .play{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:14px 16px calc(16px + env(safe-area-inset-bottom)); }
 .game{ width:100%; max-width:440px; display:flex; flex-direction:column; gap:12px; }
-.game-top{ display:flex; align-items:center; justify-content:center; gap:12px; }
+.game-top{ display:flex; align-items:center; justify-content:flex-start; gap:12px; }
 .scores{ display:flex; gap:10px; }
 .score{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:6px 14px; text-align:center; min-width:66px; }
 .score span{ display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
