@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Play Snake by Vale &amp; Co — a warm, on-brand take on the classic. Swipe or use WASD / arrow keys." />
+<title>Snake | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/snake.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Snake | Vale &amp; Co" />
+<meta property="og:description" content="Play Snake by Vale &amp; Co — a warm, on-brand take on the classic. Swipe or use WASD / arrow keys." />
+<meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/snake.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+/* ===== Lock the whole page: no scroll, no rubber-band, no swipe-scroll ===== */
+html, body{ height:100%; overflow:hidden; overscroll-behavior:none; }
+body{ height:100dvh; margin:0; touch-action:none; display:flex; flex-direction:column; }
+
+/* Compact header */
+.site-header{ position:static; flex:0 0 auto; }
+.header-inner{ padding:8px 0; }
+.site-header .brand img{ height:40px; width:auto; object-fit:contain; }
+.site-header .main-nav{ display:flex; align-items:center; gap:8px; }
+@media (max-width:680px){ .site-header .header-inner{ flex-direction:row; gap:10px; padding:8px 0; } .site-header .brand img{ height:34px; } }
+
+/* Fullscreen toggle button (top-right of the header) */
+.fs-btn{ display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--ink-soft); cursor:pointer; transition:color .18s ease, background .18s ease, border-color .18s ease; }
+.fs-btn:hover{ color:var(--ink); border-color:var(--ink); background:var(--paper-2); }
+.fs-btn svg{ width:18px; height:18px; display:block; }
+.fs-btn .fs-ic{ display:inline-flex; }
+.fs-btn .fs-exit{ display:none; }
+body.is-fs .fs-btn .fs-enter{ display:none; }
+body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
+/* CSS pseudo-fullscreen fallback (iOS Safari, where the Fullscreen API is unavailable on non-video elements) */
+body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:9999; }
+
+/* Play area fills remaining height, centers the game */
+.play{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:14px 16px calc(16px + env(safe-area-inset-bottom)); }
+.game{ width:100%; max-width:440px; display:flex; flex-direction:column; gap:12px; }
+.game-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.scores{ display:flex; gap:10px; }
+.score{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:6px 14px; text-align:center; min-width:66px; }
+.score span{ display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
+.score strong{ font-family:var(--display); font-size:20px; font-weight:700; color:var(--ink); }
+
+/* Board sizes from the SMALLER of available width and height, stays square */
+.s-board{ width:min(92vw, calc(100vh - 230px), 440px); width:min(92vw, calc(100dvh - 230px), 440px); height:auto; aspect-ratio:1/1; margin:0 auto; display:block; background:var(--paper-3); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); touch-action:none; outline:none; }
+.foot{ text-align:center; margin:0; min-height:18px; font-size:13.5px; line-height:1.3; }
+.hint{ color:var(--ink-soft); }
+.msg{ color:var(--rust-deep); font-weight:600; margin-left:6px; }
+@media (max-height:560px){ .hint{ display:none; } .game{ gap:8px; } }
+</style>
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="games.html">&larr; Back to Games</a>
+<button id="fs-btn" class="fs-btn" type="button" title="Fullscreen" aria-label="Toggle fullscreen" aria-pressed="false">
+<span class="fs-ic fs-enter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5"/></svg></span>
+<span class="fs-ic fs-exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h5V3M21 8h-5V3M21 16h-5v5M3 16h5v5"/></svg></span>
+</button>
+</nav>
+</div>
+</header>
+<main class="play">
+<div class="game">
+<div class="game-top">
+<div class="scores">
+<div class="score"><span>Score</span><strong id="s-score">0</strong></div>
+<div class="score"><span>Best</span><strong id="s-best">0</strong></div>
+</div>
+<button type="button" class="btn btn-primary" id="s-new">New game</button>
+</div>
+<canvas class="s-board" id="s-board" width="400" height="400" tabindex="0" role="application" aria-label="Snake game board"></canvas>
+<p class="foot"><span class="hint">Swipe or use WASD / arrow keys.</span><span class="msg" id="s-msg" role="status" aria-live="polite"></span></p>
+</div>
+</main>
+<script>
+(function(){
+var GRID=20, CELL=20;
+var canvas=document.getElementById('s-board');
+if(!canvas){ return; }
+var ctx=canvas.getContext('2d');
+var scoreEl=document.getElementById('s-score'), bestEl=document.getElementById('s-best'), msgEl=document.getElementById('s-msg');
+var BEST_KEY='vcoSnakeBest';
+var snake, dir, nextDir, food, score, best, alive, timer;
+best=parseInt(localStorage.getItem(BEST_KEY)||'0',10)||0;
+
+function cssVar(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
+var COL_BG=cssVar('--paper-3','#e3d8c4'), COL_SNAKE=cssVar('--rust','#b4502e'), COL_HEAD=cssVar('--rust-deep','#8c3a1f'), COL_FOOD=cssVar('--green','#3f6b4f');
+
+function onSnake(x,y){ for(var i=0;i<snake.length;i++){ if(snake[i].x===x&&snake[i].y===y) return true; } return false; }
+function hitsBody(h,ignoreTail){ var n=ignoreTail?snake.length-1:snake.length; for(var i=0;i<n;i++){ if(snake[i].x===h.x&&snake[i].y===h.y) return true; } return false; }
+function placeFood(){ do { food={ x:Math.floor(Math.random()*GRID), y:Math.floor(Math.random()*GRID) }; } while(onSnake(food.x,food.y)); }
+function updateScores(){ scoreEl.textContent=score; bestEl.textContent=best; }
+function speed(){ return Math.max(70, 140 - Math.floor(score/4)*8); }
+function schedule(){ clearTimeout(timer); if(alive){ timer=setTimeout(tick, speed()); } }
+
+function reset(){
+  snake=[{x:9,y:10},{x:8,y:10},{x:7,y:10}];
+  dir={x:1,y:0}; nextDir={x:1,y:0};
+  score=0; alive=true; msgEl.textContent='';
+  placeFood(); updateScores(); draw(); schedule();
+}
+function tick(){
+  dir=nextDir;
+  var head={ x:snake[0].x+dir.x, y:snake[0].y+dir.y };
+  var willEat=(head.x===food.x&&head.y===food.y);
+  if(head.x<0||head.y<0||head.x>=GRID||head.y>=GRID||hitsBody(head,!willEat)){ gameOver(); return; }
+  snake.unshift(head);
+  if(head.x===food.x&&head.y===food.y){ score+=1; if(score>best){ best=score; try{ localStorage.setItem(BEST_KEY,best); }catch(e){} } placeFood(); }
+  else { snake.pop(); }
+  updateScores(); draw(); schedule();
+}
+function gameOver(){ alive=false; clearTimeout(timer); msgEl.textContent=' Game over — press New game.'; }
+
+function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function drawCell(x,y,color){ var pad=2, r=4, s=CELL-pad*2; ctx.fillStyle=color; roundRect(x*CELL+pad, y*CELL+pad, s, s, r); ctx.fill(); }
+function draw(){
+  ctx.fillStyle=COL_BG; ctx.fillRect(0,0,canvas.width,canvas.height);
+  drawCell(food.x, food.y, COL_FOOD);
+  for(var i=snake.length-1;i>=0;i--){ drawCell(snake[i].x, snake[i].y, i===0?COL_HEAD:COL_SNAKE); }
+}
+
+function setDir(nx,ny){ if(!alive) return; if(nx===-dir.x && ny===-dir.y) return; nextDir={x:nx,y:ny}; }
+var KEYS={ arrowup:[0,-1], w:[0,-1], arrowdown:[0,1], s:[0,1], arrowleft:[-1,0], a:[-1,0], arrowright:[1,0], d:[1,0] };
+document.addEventListener('keydown', function(e){
+  var k=KEYS[(e.key||'').toLowerCase()]; if(!k) return;
+  var tag=(e.target&&e.target.tagName)||''; if(/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+  e.preventDefault(); setDir(k[0],k[1]);
+});
+var sx=null, sy=null;
+canvas.addEventListener('touchstart', function(e){ var t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY; }, { passive:true });
+canvas.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive:false });
+canvas.addEventListener('touchend', function(e){
+  if(sx===null) return;
+  var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy, ax=Math.abs(dx), ay=Math.abs(dy);
+  if(Math.max(ax,ay)>=20){ if(ax>ay) setDir(dx>0?1:-1,0); else setDir(0,dy>0?1:-1); }
+  sx=sy=null;
+}, { passive:false });
+document.getElementById('s-new').addEventListener('click', reset);
+
+reset();
+})();
+</script>
+<script>
+(function(){
+var btn=document.getElementById('fs-btn'); if(!btn){ return; }
+var docEl=document.documentElement;
+function supported(){ return !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen); }
+function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+function setState(on){ document.body.classList.toggle('is-fs', on); btn.setAttribute('aria-pressed', on?'true':'false'); btn.title = on?'Exit fullscreen':'Fullscreen'; }
+btn.addEventListener('click', function(){
+  if(supported()){
+    if(fsEl()){ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+    else { (docEl.requestFullscreen||docEl.webkitRequestFullscreen).call(docEl); }
+  } else {
+    var on=!document.body.classList.contains('pseudo-fs');
+    document.body.classList.toggle('pseudo-fs', on); setState(on);
+  }
+});
+function onChange(){ if(supported()){ setState(!!fsEl()); } }
+document.addEventListener('fullscreenchange', onChange);
+document.addEventListener('webkitfullscreenchange', onChange);
+})();
+</script>
+</body>
+</html>

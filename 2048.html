@@ -27,7 +27,19 @@ body{ height:100dvh; margin:0; touch-action:none; display:flex; flex-direction:c
 .site-header{ position:static; flex:0 0 auto; }
 .header-inner{ padding:8px 0; }
 .site-header .brand img{ height:40px; width:auto; object-fit:contain; }
+.site-header .main-nav{ display:flex; align-items:center; gap:8px; }
 @media (max-width:680px){ .site-header .header-inner{ flex-direction:row; gap:10px; padding:8px 0; } .site-header .brand img{ height:34px; } }
+
+/* Fullscreen toggle button (top-right of the header) */
+.fs-btn{ display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--ink-soft); cursor:pointer; transition:color .18s ease, background .18s ease, border-color .18s ease; }
+.fs-btn:hover{ color:var(--ink); border-color:var(--ink); background:var(--paper-2); }
+.fs-btn svg{ width:18px; height:18px; display:block; }
+.fs-btn .fs-ic{ display:inline-flex; }
+.fs-btn .fs-exit{ display:none; }
+body.is-fs .fs-btn .fs-enter{ display:none; }
+body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
+/* CSS pseudo-fullscreen fallback (iOS Safari, where the Fullscreen API is unavailable on non-video elements) */
+body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:9999; }
 
 /* Play area fills the remaining height and centers the game */
 .play{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:14px 16px calc(16px + env(safe-area-inset-bottom)); }
@@ -69,6 +81,10 @@ body{ height:100dvh; margin:0; touch-action:none; display:flex; flex-direction:c
 <a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
 <nav class="main-nav" aria-label="Main">
 <a href="games.html">&larr; Back to Games</a>
+<button id="fs-btn" class="fs-btn" type="button" title="Fullscreen" aria-label="Toggle fullscreen" aria-pressed="false">
+<span class="fs-ic fs-enter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5"/></svg></span>
+<span class="fs-ic fs-exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h5V3M21 8h-5V3M21 16h-5v5M3 16h5v5"/></svg></span>
+</button>
 </nav>
 </div>
 </header>
@@ -184,6 +200,27 @@ boardEl.addEventListener('touchend', function(e){
 document.getElementById('g-new').addEventListener('click', newGame);
 
 newGame();
+})();
+</script>
+<script>
+(function(){
+var btn=document.getElementById('fs-btn'); if(!btn){ return; }
+var docEl=document.documentElement;
+function supported(){ return !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen); }
+function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+function setState(on){ document.body.classList.toggle('is-fs', on); btn.setAttribute('aria-pressed', on?'true':'false'); btn.title = on?'Exit fullscreen':'Fullscreen'; }
+btn.addEventListener('click', function(){
+  if(supported()){
+    if(fsEl()){ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+    else { (docEl.requestFullscreen||docEl.webkitRequestFullscreen).call(docEl); }
+  } else {
+    var on=!document.body.classList.contains('pseudo-fs');
+    document.body.classList.toggle('pseudo-fs', on); setState(on);
+  }
+});
+function onChange(){ if(supported()){ setState(!!fsEl()); } }
+document.addEventListener('fullscreenchange', onChange);
+document.addEventListener('webkitfullscreenchange', onChange);
 })();
 </script>
 </body>
