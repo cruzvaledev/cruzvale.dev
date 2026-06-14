@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Play Klondike Solitaire by Vale &amp; Co — a warm, on-brand take on the classic card game. Tap to move, draw one." />
+<title>Solitaire | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/solitaire.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Solitaire | Vale &amp; Co" />
+<meta property="og:description" content="Play Klondike Solitaire by Vale &amp; Co — a warm, on-brand take on the classic card game. Tap to move, draw one." />
+<meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/solitaire.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+html, body{ overscroll-behavior:none; }
+body{ margin:0; min-height:100dvh; }
+
+/* Compact header */
+.site-header{ position:static; flex:0 0 auto; }
+.header-inner{ padding:8px 0; }
+.site-header .brand img{ height:40px; width:auto; object-fit:contain; }
+.site-header .main-nav{ display:flex; align-items:center; gap:8px; }
+@media (max-width:680px){ .site-header .header-inner{ flex-direction:row; gap:10px; padding:8px 0; } .site-header .brand img{ height:34px; } }
+
+/* Fullscreen button */
+.fs-btn{ display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--ink-soft); cursor:pointer; transition:color .18s ease, background .18s ease, border-color .18s ease; }
+.fs-btn:hover{ color:var(--ink); border-color:var(--ink); background:var(--paper-2); }
+.fs-btn svg{ width:18px; height:18px; display:block; }
+.fs-btn .fs-exit{ display:none; }
+body.is-fs .fs-btn .fs-enter{ display:none; }
+body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
+body.pseudo-fs{ position:fixed; inset:0; width:100vw; height:100dvh; z-index:9999; overflow:auto; background:var(--paper); }
+
+/* Toolbar */
+.play{ padding:6px 12px calc(20px + env(safe-area-inset-bottom)); }
+.toolbar{ max-width:760px; margin:0 auto 10px; display:flex; align-items:center; gap:10px; }
+.toolbar .stat{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:5px 14px; text-align:center; min-width:62px; }
+.toolbar .stat span{ display:block; font-size:10.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
+.toolbar .stat strong{ font-family:var(--display); font-size:18px; font-weight:700; color:var(--ink); }
+.toolbar .grow{ flex:1; }
+
+/* Board */
+.board-area{ max-width:760px; margin:0 auto; padding:0 4px; --cw:64px; --gap:6px; user-select:none; -webkit-user-select:none; }
+.top, .tableau{ display:grid; grid-template-columns:repeat(7, var(--cw)); gap:var(--gap); justify-content:center; }
+.tableau{ margin-top:calc(var(--cw) * 0.34); align-items:start; }
+.tab-col{ position:relative; min-height:calc(var(--cw) * 1.42); }
+
+/* Cards + slots */
+.card, .slot{ width:var(--cw); height:calc(var(--cw) * 1.42); border-radius:calc(var(--cw) * 0.12); box-sizing:border-box; touch-action:manipulation; }
+.slot{ border:1px dashed var(--line); background:rgba(34,29,22,0.03); display:flex; align-items:center; justify-content:center; color:var(--ink-faint); }
+.slot.found span{ font-size:calc(var(--cw) * 0.5); opacity:0.5; }
+.slot.recyc{ font-size:calc(var(--cw) * 0.5); cursor:pointer; }
+.card{ position:relative; cursor:pointer; }
+.card.up{ background:#fbf6ec; border:1px solid var(--line); box-shadow:0 1px 2px rgba(34,29,22,0.12); }
+.card.down{ background:var(--rust); border:1px solid var(--rust-deep); background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.12) 0 3px, transparent 3px 8px); box-shadow:0 1px 2px rgba(34,29,22,0.12); }
+.card.red{ color:#bd3b2a; }
+.card.black{ color:#26201a; }
+.card .cr{ position:absolute; top:2%; left:8%; font-family:var(--display); font-weight:700; font-size:calc(var(--cw) * 0.42); line-height:1; }
+.card .cs{ position:absolute; top:36%; left:9%; font-size:calc(var(--cw) * 0.27); line-height:1; }
+.card .cc{ position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); font-size:calc(var(--cw) * 0.6); }
+.card.sel{ outline:2px solid var(--rust); outline-offset:-1px; box-shadow:0 0 0 3px rgba(180,80,46,0.28); position:relative; z-index:5; }
+.tab-col .card{ display:block; }
+
+/* Win overlay */
+.win-overlay{ position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; background:rgba(244,238,226,0.86); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); padding:24px; }
+.win-overlay[hidden]{ display:none; }
+.win-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:32px 36px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px; }
+.win-card h2{ font-family:var(--display); font-size:clamp(32px,8vw,46px); margin:0; }
+.win-card p{ color:var(--ink-soft); margin:0; font-size:16px; }
+</style>
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="games.html">&larr; Back to Games</a>
+<button id="fs-btn" class="fs-btn" type="button" title="Fullscreen" aria-label="Toggle fullscreen" aria-pressed="false">
+<span class="fs-ic fs-enter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5"/></svg></span>
+<span class="fs-ic fs-exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h5V3M21 8h-5V3M21 16h-5v5M3 16h5v5"/></svg></span>
+</button>
+</nav>
+</div>
+</header>
+<main class="play">
+<div class="toolbar">
+<button type="button" class="btn btn-primary" id="deal">Deal</button>
+<div class="grow"></div>
+<div class="stat"><span>Moves</span><strong id="moves">0</strong></div>
+<div class="stat"><span>Best</span><strong id="best">&mdash;</strong></div>
+</div>
+<div class="board-area" id="area">
+<div class="top">
+<div id="stock"></div>
+<div id="waste"></div>
+<div></div>
+<div id="f0"></div>
+<div id="f1"></div>
+<div id="f2"></div>
+<div id="f3"></div>
+</div>
+<div class="tableau">
+<div class="tab-col" id="t0"></div>
+<div class="tab-col" id="t1"></div>
+<div class="tab-col" id="t2"></div>
+<div class="tab-col" id="t3"></div>
+<div class="tab-col" id="t4"></div>
+<div class="tab-col" id="t5"></div>
+<div class="tab-col" id="t6"></div>
+</div>
+</div>
+<div class="win-overlay" id="win" hidden>
+<div class="win-card">
+<h2>You win!</h2>
+<p id="win-text">Moves: 0</p>
+<button type="button" class="btn btn-primary" id="win-again">Play again</button>
+</div>
+</div>
+</main>
+<script>
+(function(){
+var SUITS=['♠','♥','♦','♣']; // spade, heart, diamond, club
+function color(s){ return (s===1||s===2)?'red':'black'; }
+function rankStr(r){ return r===1?'A':r===11?'J':r===12?'Q':r===13?'K':(''+r); }
+
+/* ---- core rule helpers (mirrored in the Node sanity check) ---- */
+function canToTableau(card, pile){ if(!pile.length) return card.r===13; var t=pile[pile.length-1]; return color(card.s)!==color(t.s) && card.r===t.r-1; }
+function canToFoundation(card, pile){ if(!pile.length) return card.r===1; var t=pile[pile.length-1]; return card.s===t.s && card.r===t.r+1; }
+function validRun(pile, ci){ if(ci<0||ci>=pile.length||!pile[ci].up) return false; for(var i=ci;i<pile.length-1;i++){ var a=pile[i], b=pile[i+1]; if(!a.up||!b.up) return false; if(color(a.s)===color(b.s)) return false; if(b.r!==a.r-1) return false; } return true; }
+
+/* ---- state ---- */
+var stock, waste, foundations, tableau, sel, moves, best, CW, UPOFF, DOWNOFF;
+var BEST_KEY='vcoSolitaireBest';
+best=(function(){ var v=parseInt(localStorage.getItem(BEST_KEY),10); return (isFinite(v)&&v>0)?v:null; })();
+
+var area=document.getElementById('area');
+var stockEl=document.getElementById('stock'), wasteEl=document.getElementById('waste');
+var foundEls=[document.getElementById('f0'),document.getElementById('f1'),document.getElementById('f2'),document.getElementById('f3')];
+var tabEls=[]; for(var ti=0;ti<7;ti++){ tabEls.push(document.getElementById('t'+ti)); }
+var movesEl=document.getElementById('moves'), bestEl=document.getElementById('best');
+var winEl=document.getElementById('win'), winText=document.getElementById('win-text');
+
+function makeDeck(){ var d=[]; for(var s=0;s<4;s++){ for(var r=1;r<=13;r++){ d.push({s:s,r:r,up:false}); } } return d; }
+function shuffle(d){ for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+
+function deal(){
+  var d=shuffle(makeDeck());
+  tableau=[[],[],[],[],[],[],[]];
+  for(var col=0;col<7;col++){ for(var k=0;k<=col;k++){ var c=d.pop(); c.up=(k===col); tableau[col].push(c); } }
+  stock=d; waste=[]; foundations=[[],[],[],[]];
+  moves=0; sel=null; winEl.hidden=true;
+  render();
+}
+
+function flipTop(pile){ if(pile.length){ var t=pile[pile.length-1]; if(!t.up) t.up=true; } }
+function selRun(){ if(!sel) return []; if(sel.pile==='waste') return waste.length?[waste[waste.length-1]]:[]; return tableau[sel.i].slice(sel.c); }
+
+function removeSelFromSource(n){ if(sel.pile==='waste'){ waste.pop(); } else { tableau[sel.i].splice(sel.c); flipTop(tableau[sel.i]); } }
+
+function tryTableau(di){
+  if(!sel) return false;
+  if(sel.pile==='tableau' && sel.i===di) return false;
+  if(sel.pile==='tableau' && !validRun(tableau[sel.i], sel.c)) return false;
+  var run=selRun(); if(!run.length) return false;
+  if(canToTableau(run[0], tableau[di])){
+    removeSelFromSource();
+    for(var k=0;k<run.length;k++){ tableau[di].push(run[k]); }
+    moves++; sel=null; afterMove(); return true;
+  }
+  return false;
+}
+function tryFoundation(f){
+  if(!sel) return false;
+  var run=selRun(); if(run.length!==1) return false;
+  var card=run[0]; if(f!==card.s) return false;
+  if(canToFoundation(card, foundations[f])){
+    removeSelFromSource();
+    foundations[f].push(card);
+    moves++; sel=null; afterMove(); return true;
+  }
+  return false;
+}
+function autoSendTop(type, i){
+  var card;
+  if(type==='waste'){ if(!waste.length) return false; card=waste[waste.length-1]; }
+  else { var p=tableau[i]; if(!p.length) return false; card=p[p.length-1]; if(!card.up) return false; }
+  if(!canToFoundation(card, foundations[card.s])) return false;
+  if(type==='waste'){ waste.pop(); } else { tableau[i].pop(); flipTop(tableau[i]); }
+  foundations[card.s].push(card);
+  moves++; sel=null; afterMove(); return true;
+}
+function draw(){
+  if(stock.length){ var c=stock.pop(); c.up=true; waste.push(c); moves++; }
+  else if(waste.length){ while(waste.length){ var w=waste.pop(); w.up=false; stock.push(w); } moves++; }
+  sel=null; render();
+}
+function afterMove(){
+  if(foundations[0].length===13 && foundations[1].length===13 && foundations[2].length===13 && foundations[3].length===13){
+    if(best===null || moves<best){ best=moves; try{ localStorage.setItem(BEST_KEY, best); }catch(e){} }
+    winText.textContent='Moves: '+moves+(best!==null?'  ·  Best: '+best:'');
+    winEl.hidden=false;
+  }
+  render();
+}
+
+/* ---- double-tap detection ---- */
+var lastId=null, lastT=0;
+function isDouble(id){ var now=Date.now(); var d=(id===lastId)&&(now-lastT<320); lastId=id; lastT=now; if(d){ lastId=null; } return d; }
+
+/* ---- click handlers (attached once to persistent containers) ---- */
+stockEl.addEventListener('click', function(){ draw(); });
+wasteEl.addEventListener('click', function(){
+  if(!waste.length) return;
+  if(isDouble('w')){ if(autoSendTop('waste',0)) return; }
+  if(sel && sel.pile==='waste'){ sel=null; render(); return; }
+  sel={pile:'waste'}; render();
+});
+foundEls.forEach(function(fe, f){ fe.addEventListener('click', function(){ if(sel){ if(tryFoundation(f)) return; sel=null; render(); } }); });
+tabEls.forEach(function(col, i){
+  col.addEventListener('click', function(e){
+    var cardEl=e.target.closest('.card');
+    if(cardEl && cardEl.dataset.ci!==undefined){ clickTabCard(i, parseInt(cardEl.dataset.ci,10)); }
+    else { if(sel){ if(!tryTableau(i)){ sel=null; render(); } } }
+  });
+});
+function clickTabCard(i, ci){
+  var card=tableau[i][ci];
+  if(!card.up){ if(sel){ if(!tryTableau(i)){ sel=null; render(); } } return; }
+  if(isDouble(i+'-'+ci) && ci===tableau[i].length-1){ if(autoSendTop('tableau', i)) return; }
+  if(sel){
+    if(sel.pile==='tableau' && sel.i===i && sel.c===ci){ sel=null; render(); return; }
+    if(tryTableau(i)) return;
+    if(validRun(tableau[i], ci)){ sel={pile:'tableau', i:i, c:ci}; render(); return; }
+    sel=null; render(); return;
+  }
+  if(validRun(tableau[i], ci)){ sel={pile:'tableau', i:i, c:ci}; render(); }
+}
+
+/* ---- rendering ---- */
+function faceEl(card){
+  var el=document.createElement('div');
+  el.className='card up '+color(card.s);
+  el.innerHTML='<span class="cr">'+rankStr(card.r)+'</span><span class="cs">'+SUITS[card.s]+'</span><span class="cc">'+SUITS[card.s]+'</span>';
+  return el;
+}
+function backEl(){ var el=document.createElement('div'); el.className='card down'; return el; }
+
+function render(){
+  stockEl.innerHTML='';
+  if(stock.length){ stockEl.appendChild(backEl()); }
+  else { stockEl.innerHTML='<div class="slot recyc">↻</div>'; }
+
+  wasteEl.innerHTML='';
+  if(waste.length){ var w=faceEl(waste[waste.length-1]); if(sel&&sel.pile==='waste'){ w.classList.add('sel'); } wasteEl.appendChild(w); }
+  else { wasteEl.innerHTML='<div class="slot"></div>'; }
+
+  for(var f=0;f<4;f++){
+    foundEls[f].innerHTML='';
+    if(foundations[f].length){ foundEls[f].appendChild(faceEl(foundations[f][foundations[f].length-1])); }
+    else { foundEls[f].innerHTML='<div class="slot found"><span>'+SUITS[f]+'</span></div>'; }
+  }
+
+  for(var i=0;i<7;i++){
+    var col=tabEls[i]; col.innerHTML='';
+    var pile=tableau[i];
+    if(!pile.length){ col.innerHTML='<div class="slot"></div>'; continue; }
+    for(var ci=0;ci<pile.length;ci++){
+      var card=pile[ci];
+      var el=card.up?faceEl(card):backEl();
+      el.dataset.ci=ci;
+      if(ci>0){ el.style.marginTop=(card.up?UPOFF:DOWNOFF)+'px'; }
+      if(sel && sel.pile==='tableau' && sel.i===i && ci>=sel.c){ el.classList.add('sel'); }
+      col.appendChild(el);
+    }
+  }
+  movesEl.textContent=moves;
+  bestEl.textContent=(best===null?'—':best);
+}
+
+function sizeBoard(){
+  var W=area.clientWidth;
+  var gap=W<480?6:10;
+  var cw=Math.floor((W - gap*6)/7);
+  var maxcw=W<480?70:96; if(cw>maxcw){ cw=maxcw; }
+  if(cw<34){ cw=34; }
+  CW=cw;
+  UPOFF=-Math.round(cw*0.94);
+  DOWNOFF=-Math.round(cw*1.10);
+  area.style.setProperty('--cw', cw+'px');
+  area.style.setProperty('--gap', gap+'px');
+  render();
+}
+window.addEventListener('resize', sizeBoard, { passive:true });
+window.addEventListener('orientationchange', sizeBoard);
+document.getElementById('deal').addEventListener('click', deal);
+document.getElementById('win-again').addEventListener('click', deal);
+
+deal();
+sizeBoard();
+})();
+</script>
+<script>
+(function(){
+var btn=document.getElementById('fs-btn'); if(!btn){ return; }
+var docEl=document.documentElement;
+function supported(){ return !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen); }
+function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+function setState(on){ document.body.classList.toggle('is-fs', on); btn.setAttribute('aria-pressed', on?'true':'false'); btn.title = on?'Exit fullscreen':'Fullscreen'; }
+btn.addEventListener('click', function(){
+  if(supported()){
+    if(fsEl()){ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+    else { (docEl.requestFullscreen||docEl.webkitRequestFullscreen).call(docEl); }
+  } else {
+    var on=!document.body.classList.contains('pseudo-fs');
+    document.body.classList.toggle('pseudo-fs', on); setState(on);
+  }
+});
+function onChange(){ if(supported()){ setState(!!fsEl()); } }
+document.addEventListener('fullscreenchange', onChange);
+document.addEventListener('webkitfullscreenchange', onChange);
+})();
+</script>
+</body>
+</html>
