@@ -18,6 +18,16 @@
 <meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
 <meta property="og:url" content="https://cruzvale.dev/games.html" />
 <meta name="twitter:card" content="summary_large_image" />
+<style>
+/* Auto-detected game container: only the matching device's set is shown (games page only) */
+.game-bucket{ border:1px dashed var(--line); border-radius:var(--radius); background:var(--paper); box-shadow:var(--shadow); min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:12px; padding:52px 28px; }
+/* JS-driven show/hide: body gets .is-mobile or .is-desktop */
+body.is-mobile #desktop-games{ display:none; }
+body.is-desktop #mobile-games{ display:none; }
+/* No-JS fallback: decide by device capability via media queries */
+@media (hover:none),(pointer:coarse){ body:not(.is-mobile):not(.is-desktop) #desktop-games{ display:none; } }
+@media (hover:hover) and (pointer:fine){ body:not(.is-mobile):not(.is-desktop) #mobile-games{ display:none; } }
+</style>
 </head>
 <body class="grain">
 <header class="site-header">
@@ -43,21 +53,46 @@
 <div class="wrap">
 <p class="eyebrow">Games</p>
 <h1>Games are on the way.</h1>
-<p class="lede">A little corner of the site for something fun. The first game is in the works — check back soon and it will be playable right here.</p>
+<p class="lede">A little corner of the site for something fun. The first games are in the works — check back soon and they will be playable right here.</p>
 </div>
 </section>
 <section style="padding-top:8px;">
 <div class="wrap">
-<!-- FIRST GAME GOES HERE: replace the placeholder contents of #game below with the game markup (iframe, canvas, etc.). Keep the id="game" wrapper. -->
-<div id="game" style="border:1px dashed var(--line); border-radius:var(--radius); background:var(--paper); box-shadow:var(--shadow); min-height:340px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px; padding:56px 28px;">
+<!-- Only the container matching the visitor's device is shown (auto-detected). Drop games into the matching bucket. -->
+<!-- MOBILE GAMES: touch-friendly games go in #mobile-games -->
+<div id="mobile-games" class="game-bucket">
 <p class="eyebrow" style="margin:0;">Coming soon</p>
-<h2 style="margin:0;">The first game is being built.</h2>
-<p class="lede" style="margin:0 auto; max-width:46ch;">This space is reserved for it. Want a heads up when it drops? Reach out and I will let you know.</p>
-<a class="btn btn-primary" href="contact.html">Get in touch</a>
+<h2 style="margin:0;">Games built for phones and tablets.</h2>
+<p class="lede" style="margin:0 auto; max-width:46ch;">Touch-friendly games are on the way. Check back soon, or get a heads up when they drop.</p>
 </div>
+<!-- DESKTOP GAMES: keyboard/mouse games go in #desktop-games -->
+<div id="desktop-games" class="game-bucket">
+<p class="eyebrow" style="margin:0;">Coming soon</p>
+<h2 style="margin:0;">Games built for keyboard and mouse.</h2>
+<p class="lede" style="margin:0 auto; max-width:46ch;">Bigger-screen games are on the way. Check back soon, or get a heads up when they drop.</p>
+</div>
+<p style="text-align:center; margin-top:26px;"><a class="btn btn-primary" href="contact.html">Get in touch</a></p>
 </div>
 </section>
 <footer><div class="wrap"><p><strong>Vale &amp; Co</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+(function(){
+var body = document.body;
+function detect(){
+return window.matchMedia('(pointer: coarse)').matches
+|| window.matchMedia('(hover: none)').matches
+|| window.innerWidth <= 760;
+}
+function apply(){
+var mobile = detect();
+body.classList.toggle('is-mobile', mobile);
+body.classList.toggle('is-desktop', !mobile);
+}
+apply();
+window.addEventListener('resize', apply, { passive: true });
+window.addEventListener('orientationchange', apply);
+})();
+</script>
 <script>
 (function(){
 var hdr = document.querySelector('.site-header');
