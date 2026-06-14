@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Games by Vale &amp; Co in Topeka, Kansas. A little corner of the site for something fun — the first game is on the way." />
+<title>Games | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/games.html" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Games | Vale &amp; Co" />
+<meta property="og:description" content="Games by Vale &amp; Co in Topeka, Kansas. A little corner of the site for something fun — the first game is on the way." />
+<meta property="og:image" content="https://cruzvale.dev/images/auto-accord.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/games.html" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="social-media.html">Social Media</a>
+<a href="photography.html">Photography</a>
+<a href="auto-detailing.html">Auto Detailing</a>
+<a href="partners.html">Partners</a>
+<a href="about.html">About</a>
+<a href="contact.html" class="nav-cta">Contact</a>
+<details class="nav-more">
+<summary>More</summary>
+<div class="more-menu">
+<a href="games.html" class="active">Games</a>
+</div>
+</details>
+</nav>
+</div>
+</header>
+<section class="page-title">
+<div class="wrap">
+<p class="eyebrow">Games</p>
+<h1>Games are on the way.</h1>
+<p class="lede">A little corner of the site for something fun. The first game is in the works — check back soon and it will be playable right here.</p>
+</div>
+</section>
+<section style="padding-top:8px;">
+<div class="wrap">
+<!-- FIRST GAME GOES HERE: replace the placeholder contents of #game below with the game markup (iframe, canvas, etc.). Keep the id="game" wrapper. -->
+<div id="game" style="border:1px dashed var(--line); border-radius:var(--radius); background:var(--paper); box-shadow:var(--shadow); min-height:340px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px; padding:56px 28px;">
+<p class="eyebrow" style="margin:0;">Coming soon</p>
+<h2 style="margin:0;">The first game is being built.</h2>
+<p class="lede" style="margin:0 auto; max-width:46ch;">This space is reserved for it. Want a heads up when it drops? Reach out and I will let you know.</p>
+<a class="btn btn-primary" href="contact.html">Get in touch</a>
+</div>
+</div>
+</section>
+<footer><div class="wrap"><p><strong>Vale &amp; Co</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+(function(){
+var hdr = document.querySelector('.site-header');
+if(!hdr){ return; }
+function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 80); }
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+</body>
+</html>
