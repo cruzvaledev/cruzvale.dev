@@ -48,11 +48,22 @@ body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
 
 /* two-column cookie-clicker layout */
 .cc{ display:grid; gap:14px; align-items:start;
-  grid-template-columns:minmax(290px,1fr) minmax(300px,1.05fr);
-  grid-template-areas:"clicker store" "save store"; }
+  grid-template-columns:minmax(200px,0.82fr) minmax(250px,1.25fr) minmax(280px,1.05fr);
+  grid-template-areas:"clicker factory store" "save factory store"; }
 .cc-clicker{ grid-area:clicker; display:flex; flex-direction:column; align-items:center; gap:12px; }
 .cc-store{ grid-area:store; }
 .cc-save{ grid-area:save; }
+/* middle column: your physical buildings, drawn as little vector chips */
+.cc-factory{ grid-area:factory; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-direction:column; gap:10px; }
+.fac-band{ border-bottom:1px solid var(--line); padding-bottom:9px; }
+.fac-band:last-child{ border-bottom:none; padding-bottom:0; }
+.fac-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px; }
+.fac-name{ font-family:'Fraunces',serif; font-weight:600; font-size:15px; }
+.fac-amt{ font-family:var(--mono); font-weight:700; color:var(--accent); font-size:14px; }
+.fac-icons{ display:flex; flex-wrap:wrap; gap:3px; align-items:center; min-height:20px; }
+.ficon{ width:18px; height:18px; color:var(--accent); flex:0 0 auto; }
+.fac-more{ font-family:var(--mono); font-size:11px; color:var(--muted); margin-left:4px; align-self:center; }
+.fac-empty{ font-size:11.5px; color:var(--faint); }
 
 /* core counter + per-second on the same line, above the click target */
 .counter{ display:flex; align-items:baseline; justify-content:center; gap:14px; flex-wrap:wrap; text-align:center; }
@@ -123,8 +134,10 @@ body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
 #save-box{ width:100%; min-height:46px; margin-top:8px; resize:vertical; background:#0d141d; border:1px solid var(--line-2); border-radius:9px; color:var(--text); font-family:var(--mono); font-size:11px; padding:8px; }
 .save-hint{ color:var(--faint); font-size:11px; margin-top:5px; }
 
-/* mobile: lock to one screen (no scroll). Rows are fixed + uniform; the clicker
-   area takes the leftover height and the glass square shrinks to fit. */
+/* mobile: Cookie-Clicker style — TOP-ALIGNED. Count + per-second on top, the glass
+   click target right under it, then the store list, save toolbar pinned at the bottom.
+   The glass is sized off the dynamic viewport height so it always shrinks to fit and
+   can never push the counter off the top. Rows stay fixed + uniform. No scroll. */
 @media (max-width:760px){
   html,body{ height:100dvh; overflow:hidden; }
   body{ display:flex; flex-direction:column; }
@@ -132,32 +145,33 @@ body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
   .wrap{ flex:1 1 auto; min-height:0; display:flex; padding:6px 10px 8px; }
   .cc{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:8px;
        grid-template-columns:none; grid-template-areas:none; }
+  .cc-factory{ display:none; } /* middle building view is desktop-only; keep mobile to one screen */
 
-  /* clicker absorbs leftover height; counter on top, glass centered, ministats below */
-  .cc-clicker{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
-  .counter{ flex:0 0 auto; gap:8px; }
-  .count-big{ font-size:clamp(24px,6.4vw,32px); }
+  /* clicker block: natural height, top-aligned (never clipped at the top) */
+  .cc-clicker{ flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .counter{ gap:8px; }
+  .count-big{ font-size:clamp(24px,6.2vw,32px); }
   .count-cps{ font-size:12px; }
-  .ministats{ flex:0 0 auto; gap:12px; font-size:10.5px; }
-  .gen-wrap{ flex:1 1 auto; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
-  .glass{ height:min(100%,150px); width:auto; max-width:72vw; aspect-ratio:1/1; border-radius:20px; }
-  .glass-glyph{ font-size:clamp(28px,8vw,44px); }
-  .glass-lbl{ font-size:9.5px; }
-  .per{ font-size:11.5px; }
+  .gen-wrap{ flex:0 0 auto; }
+  .glass{ width:min(150px, 52vw, 19dvh); height:auto; aspect-ratio:1/1; border-radius:20px; }
+  .glass-glyph{ font-size:clamp(24px,6.5vw,40px); }
+  .glass-lbl{ font-size:9px; letter-spacing:0.12em; }
+  .per{ font-size:11px; }
+  .ministats{ gap:12px; font-size:10.5px; }
 
-  /* store: fixed, uniform rows (no stretching) */
+  /* store: fixed, uniform rows */
   .cc-store{ flex:0 0 auto; }
   .buildings{ gap:6px; }
-  .srow{ height:54px; }
-  .srow-buy{ min-height:0; height:100%; padding:6px 12px; }
-  .srow-name{ font-size:14.5px; }
+  .srow{ height:50px; }
+  .srow-buy{ min-height:0; height:100%; padding:5px 12px; }
+  .srow-name{ font-size:14px; }
   .srow-tech{ font-size:10px; max-width:46vw; }
-  .srow-meta{ font-size:10.5px; }
-  .srow-owned{ font-size:20px; }
-  .srow-up{ width:72px; font-size:10.5px; padding:4px; }
+  .srow-meta{ font-size:10px; }
+  .srow-owned{ font-size:19px; }
+  .srow-up{ width:70px; font-size:10px; padding:4px; }
 
-  /* compact save toolbar */
-  .cc-save{ flex:0 0 auto; }
+  /* save toolbar pinned to the bottom; any slack sits above it */
+  .cc-save{ flex:0 0 auto; margin-top:auto; }
   .cc-save h2{ display:none; }
   .save-hint{ display:none; }
   .cc-tools{ gap:5px; }
@@ -201,6 +215,8 @@ body.is-fs .fs-btn .fs-exit{ display:inline-flex; }
 <div><span>Saved</span><b id="s-saved">just now</b></div>
 </div>
 </section>
+
+<section class="cc-factory" id="factory"></section>
 
 <section class="cc-store">
 <div class="welcome" id="welcome" hidden></div>
@@ -479,6 +495,39 @@ function renderBuildings(){
     }
   });
 }
+/* ----- middle column: physical buildings as little vector chips ----- */
+var ICON = {
+  cpu:'<svg viewBox="0 0 24 24" class="ficon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="currentColor" stroke="none" opacity=".5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>',
+  gpu:'<svg viewBox="0 0 24 24" class="ficon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="8.5" cy="12" r="2.3"/><path d="M13 10.5h4M13 13.5h4M6 17v3M18 17v3"/></svg>',
+  ram:'<svg viewBox="0 0 24 24" class="ficon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 16v2.5M10 16v2.5M14 16v2.5M18 16v2.5"/><rect x="6" y="10.5" width="3" height="3" fill="currentColor" stroke="none" opacity=".5"/><rect x="11" y="10.5" width="3" height="3" fill="currentColor" stroke="none" opacity=".5"/></svg>',
+  apu:'<svg viewBox="0 0 24 24" class="ficon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M12 6v12M9 3v3M15 3v3M9 18v3M15 18v3"/><circle cx="9" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>',
+  npu:'<svg viewBox="0 0 24 24" class="ficon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="7" cy="8" r="1.7"/><circle cx="7" cy="16" r="1.7"/><circle cx="17" cy="12" r="1.7"/><path d="M8.6 8.6 15.4 11.3M8.6 15.4 15.4 12.7"/></svg>'
+};
+var FAC_CAP = 24; // max chips drawn per row; the count number stays authoritative
+var facRefs = {};
+function buildFactory(){
+  var host = document.getElementById('factory'); if(!host) return; host.innerHTML='';
+  ORDER.forEach(function(k){
+    var band = document.createElement('div'); band.className='fac-band';
+    band.innerHTML = '<div class="fac-head"><span class="fac-name">'+DATA[k].name+'</span><span class="fac-amt" data-ff="amt">0</span></div><div class="fac-icons" data-ff="icons"></div>';
+    host.appendChild(band);
+    facRefs[k] = { amt:band.querySelector('[data-ff="amt"]'), icons:band.querySelector('[data-ff="icons"]') };
+  });
+}
+function renderFactory(){
+  if(!facRefs.cpu) return;
+  ORDER.forEach(function(k){
+    facRefs[k].amt.textContent = owned[k];
+    var html='';
+    if(owned[k] === 0){ html = '<span class="fac-empty">None yet — buy one from the store</span>'; }
+    else {
+      var n = Math.min(owned[k], FAC_CAP);
+      for(var i=0;i<n;i++){ html += ICON[k]; }
+      if(owned[k] > FAC_CAP){ html += '<span class="fac-more">+'+fmt(owned[k]-FAC_CAP)+'</span>'; }
+    }
+    facRefs[k].icons.innerHTML = html;
+  });
+}
 function renderSavedAge(){
   var secs = Math.max(0, Math.floor((Date.now() - lastSavedTs)/1000));
   var t;
@@ -488,7 +537,7 @@ function renderSavedAge(){
   else t = Math.floor(secs/3600) + 'h ago';
   document.getElementById('s-saved').textContent = t;
 }
-function renderAll(){ renderStats(); renderBuildings(); renderSavedAge(); }
+function renderAll(){ renderStats(); renderBuildings(); renderFactory(); renderSavedAge(); }
 
 /* floating +N text on the glass square */
 function spawnFloat(text){
@@ -549,6 +598,7 @@ function loop(now){
    ============================================================ */
 function init(){
   buildCards();
+  buildFactory();
   loadGame();
   renderAll();
   document.getElementById('generate').addEventListener('click', manualClick);
