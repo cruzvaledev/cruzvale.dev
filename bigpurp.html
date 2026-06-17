@@ -72,7 +72,7 @@
 <div class="spec"><div class="k">Engine</div><div class="v">B18 block with a B16 VTEC head, turbocharged &mdash; 17 psi of boost on E85</div></div>
 <div class="spec"><div class="k">Transmission</div><div class="v">5-speed manual with an LSD (limited-slip differential)</div></div>
 <div class="spec"><div class="k">Wheels</div><div class="v">17x9 Weds wheels</div></div>
-<div class="spec"><div class="k">Suspension</div><div class="v">Details coming soon</div></div>
+<div class="spec"><div class="k">Suspension</div><div class="v">Truhardt drag suspension</div></div>
 <div class="spec"><div class="k">Paint</div><div class="v">Custom lowrider paint job &mdash; a 1-of-1 purple</div></div>
 <div class="spec"><div class="k">Exhaust</div><div class="v">Fully custom fender-exit exhaust</div></div>
 <div class="spec"><div class="k">Exterior</div><div class="v">Window tint; rare clear tail lights</div></div>
@@ -82,19 +82,26 @@
 <section>
 <div class="wrap">
 <div class="clip">
-<video controls playsinline preload="metadata" poster="images/bigpurp.jpg">
+<video controls muted loop playsinline preload="metadata" poster="images/bigpurp.jpg">
 <source src="videos/bigpurp-flames.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 </div>
 <p class="clip-cap">Cora 2-stepping &amp; shooting flames.</p>
 <div class="clip">
-<video controls playsinline preload="metadata" poster="images/bigpurp.jpg">
+<video controls muted loop playsinline preload="metadata" poster="images/bigpurp.jpg">
 <source src="videos/bigpurp-flyby.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 </div>
 <p class="clip-cap">Fly-by.</p>
+<div class="clip">
+<video controls muted loop playsinline preload="metadata" poster="images/bigpurp.jpg">
+<source src="videos/bigpurp-drag.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</div>
+<p class="clip-cap">Personal best &mdash; 12.7 @ 107 mph in the 1/4 mile &middot; Tulsa Raceway, on new slicks.</p>
 </div>
 </section>
 <section class="alt">
@@ -122,6 +129,23 @@ if(!hdr){ return; }
 function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 80); }
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+<script>
+(function(){
+  var vids = document.querySelectorAll('.clip video');
+  if(!('IntersectionObserver' in window) || !vids.length){ return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting && e.intersectionRatio >= 0.5){
+        try{ var p = v.play(); if(p && p.catch){ p.catch(function(){}); } }catch(err){}
+      } else {
+        try{ v.pause(); }catch(err){}
+      }
+    });
+  }, { threshold: [0, 0.5, 1] });
+  for(var i=0;i<vids.length;i++){ io.observe(vids[i]); }
 })();
 </script>
 </body>
