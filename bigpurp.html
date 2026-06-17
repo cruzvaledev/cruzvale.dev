@@ -31,6 +31,27 @@
 .clip{ max-width:360px; margin:8px auto 0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#0c0c0e; }
 .clip video{ display:block; width:100%; height:auto; }
 .clip-cap{ text-align:center; color:var(--ink-soft); font-size:13.5px; margin-top:10px; }
+/* compact two-column spec sheet */
+.specs2{ margin-top:26px; display:grid; grid-template-columns:1fr; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--paper); }
+@media (min-width:600px){ .specs2{ grid-template-columns:1fr 1fr; } }
+.specs2 .row{ display:flex; gap:10px; padding:8px 16px; font-size:13.5px; border-top:1px solid var(--line-soft); }
+.specs2 .row:first-child{ border-top:none; }
+@media (min-width:600px){ .specs2 .row:nth-child(2){ border-top:none; } }
+.specs2 .k{ flex:0 0 116px; font-weight:600; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--rust); padding-top:2px; }
+.specs2 .v{ color:var(--ink-soft); line-height:1.4; }
+/* gallery carousel (portrait, capped height) */
+.carousel{ position:relative; width:100%; max-width:400px; margin:24px auto 0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#0c0c0e; }
+.carousel .track{ display:flex; transition:transform .5s cubic-bezier(.4,0,.2,1); }
+.carousel .slide{ min-width:100%; }
+.carousel .frame{ aspect-ratio:3/4; overflow:hidden; }
+.carousel .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+.carousel .cbtn{ position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border:none; border-radius:50%; background:rgba(12,12,14,0.5); color:#fff; font-size:1.4rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; transition:background .2s; }
+.carousel .cbtn:hover{ background:rgba(12,12,14,0.82); }
+.carousel .cprev{ left:12px; } .carousel .cnext{ right:12px; }
+.carousel .dots{ position:absolute; left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; z-index:2; }
+.carousel .dots button{ width:9px; height:9px; padding:0; border:none; border-radius:50%; background:rgba(255,255,255,0.55); cursor:pointer; }
+.carousel .dots button.active{ background:#fff; }
+.carousel.single .cbtn, .carousel.single .dots{ display:none; }
 </style>
 </head>
 <body class="grain">
@@ -64,18 +85,17 @@
 <section style="padding-top:8px;">
 <div class="wrap">
 <div class="car-main"><img src="images/bigpurp.jpg" alt="Big Purp — a purple 1999 Honda Civic drag car"></div>
-<!-- SPECS: owner to fill in the real numbers. Keep the same .spec markup to add rows. -->
-<div class="specs">
-<div class="spec"><div class="k">Year</div><div class="v">1999</div></div>
-<div class="spec"><div class="k">Make / Model</div><div class="v">Honda Civic</div></div>
-<div class="spec"><div class="k">Build</div><div class="v">Drag car</div></div>
-<div class="spec"><div class="k">Engine</div><div class="v">B18 block with a B16 VTEC head, turbocharged &mdash; 17 psi of boost on E85</div></div>
-<div class="spec"><div class="k">Transmission</div><div class="v">5-speed manual with an LSD (limited-slip differential)</div></div>
-<div class="spec"><div class="k">Wheels</div><div class="v">17x9 Weds wheels</div></div>
-<div class="spec"><div class="k">Suspension</div><div class="v">Truhardt drag suspension</div></div>
-<div class="spec"><div class="k">Paint</div><div class="v">Custom lowrider paint job &mdash; a 1-of-1 purple</div></div>
-<div class="spec"><div class="k">Exhaust</div><div class="v">Fully custom fender-exit exhaust</div></div>
-<div class="spec"><div class="k">Exterior</div><div class="v">Window tint; rare clear tail lights</div></div>
+<div class="specs2">
+<div class="row"><span class="k">Year</span><span class="v">1999</span></div>
+<div class="row"><span class="k">Make / Model</span><span class="v">Honda Civic</span></div>
+<div class="row"><span class="k">Build</span><span class="v">Drag car</span></div>
+<div class="row"><span class="k">Engine</span><span class="v">B18 block with a B16 VTEC head, turbocharged &mdash; 17 psi of boost on E85</span></div>
+<div class="row"><span class="k">Transmission</span><span class="v">5-speed manual with an LSD (limited-slip differential)</span></div>
+<div class="row"><span class="k">Wheels</span><span class="v">17x9 Weds wheels</span></div>
+<div class="row"><span class="k">Suspension</span><span class="v">Truhardt drag suspension</span></div>
+<div class="row"><span class="k">Paint</span><span class="v">Custom lowrider paint job &mdash; a 1-of-1 purple</span></div>
+<div class="row"><span class="k">Exhaust</span><span class="v">Fully custom fender-exit exhaust</span></div>
+<div class="row"><span class="k">Exterior</span><span class="v">Window tint; rare clear tail lights</span></div>
 </div>
 </div>
 </section>
@@ -104,20 +124,22 @@ Your browser does not support the video tag.
 <p class="clip-cap">Personal best &mdash; 12.7 @ 107 mph in the 1/4 mile &middot; Tulsa Raceway, on new slicks.</p>
 </div>
 </section>
-<section class="alt">
-<div class="wrap">
-<p class="eyebrow">The story</p>
-<h2>About Big Purp</h2>
-<p class="lede" style="max-width:64ch;">Details coming soon &mdash; Cora can drop the build story here: the drag setup, best times, and what's next.</p>
-</div>
-</section>
 <section>
 <div class="wrap">
 <p class="eyebrow">Gallery</p>
 <h2>More of Big Purp</h2>
-<div class="gallery-grid">
-<div class="tile land"><div class="img"><img src="images/bigpurp.jpg" alt="Big Purp, the purple Honda Civic drag car" loading="lazy"></div></div>
-<!-- Add more Big Purp photos here, same markup: <div class="tile land"><div class="img"><img src="images/FILE.jpg" alt="..." loading="lazy"></div></div> -->
+<div class="carousel" data-delay="3000">
+<div class="track">
+<div class="slide"><div class="frame"><img src="images/bigpurp.jpg" alt="Big Purp — purple 1999 Honda Civic drag car"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g1.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g2.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g3.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g4.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g5.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+</div>
+<button class="cbtn cprev" aria-label="Previous photo">&#8249;</button>
+<button class="cbtn cnext" aria-label="Next photo">&#8250;</button>
+<div class="dots"></div>
 </div>
 </div>
 </section>
@@ -146,6 +168,32 @@ window.addEventListener('scroll', onScroll, { passive: true });
     });
   }, { threshold: [0, 0.5, 1] });
   for(var i=0;i<vids.length;i++){ io.observe(vids[i]); }
+})();
+</script>
+<script>
+(function(){
+  function initCarousel(c){
+    var track=c.querySelector('.track');
+    var slides=c.querySelectorAll('.slide');
+    var n=slides.length;
+    if(n<=1){ c.classList.add('single'); return; }
+    var dotsWrap=c.querySelector('.dots');
+    var i=0, timer=null, delay=parseInt(c.getAttribute('data-delay')||'3000',10);
+    var dots=[];
+    for(var k=0;k<n;k++){ (function(k){ var b=document.createElement('button'); b.setAttribute('aria-label','Go to photo '+(k+1)); b.addEventListener('click', function(){ go(k); reset(); }); dotsWrap.appendChild(b); dots.push(b); })(k); }
+    function go(idx){ i=(idx+n)%n; track.style.transform='translateX(-'+(i*100)+'%)'; for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===i); } }
+    function next(){ go(i+1); } function prev(){ go(i-1); }
+    function start(){ timer=setInterval(next, delay); } function stop(){ clearInterval(timer); } function reset(){ stop(); start(); }
+    c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
+    c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
+    c.addEventListener('mouseenter', stop); c.addEventListener('mouseleave', start);
+    var x0=null;
+    c.addEventListener('touchstart', function(e){ x0=e.touches[0].clientX; stop(); }, { passive:true });
+    c.addEventListener('touchend', function(e){ if(x0===null){ return; } var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){ if(dx<0){ next(); } else { prev(); } } x0=null; start(); }, { passive:true });
+    go(0); start();
+  }
+  var cs=document.querySelectorAll('.carousel');
+  for(var ci=0; ci<cs.length; ci++){ initCarousel(cs[ci]); }
 })();
 </script>
 </body>
