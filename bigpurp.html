@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Big Purp — Cora's purple 1999 Honda Civic drag car. A Vale &amp; Co build in Topeka, Kansas." />
+<title>Big Purp | Vale &amp; Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cruzvale.dev/bigpurp.html" />
+<link rel="preload" as="image" href="images/bigpurp.jpg" />
+<meta name="theme-color" content="#f4eee2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Big Purp | Vale &amp; Co" />
+<meta property="og:description" content="Big Purp — Cora's purple 1999 Honda Civic drag car." />
+<meta property="og:image" content="https://cruzvale.dev/images/bigpurp.jpg" />
+<meta property="og:url" content="https://cruzvale.dev/bigpurp.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+.car-main{ width:100%; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); margin-top:8px; }
+.car-main img{ width:100%; height:auto; max-height:64vh; object-fit:cover; display:block; }
+.specs{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin-top:30px; }
+.spec{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-sm); padding:16px 18px; }
+.spec .k{ font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--rust); }
+.spec .v{ color:var(--ink-soft); font-size:15.5px; margin-top:5px; }
+.backlink{ font-size:13.5px; font-weight:600; color:var(--ink-soft); }
+.backlink:hover{ color:var(--ink); }
+</style>
+</head>
+<body class="grain">
+<header class="site-header">
+<div class="wrap header-inner">
+<a href="index.html" class="brand"><img src="images/valeandco.png" alt="Vale &amp; Co"></a>
+<nav class="main-nav" aria-label="Main">
+<a href="social-media.html">Social Media</a>
+<a href="photography.html">Photography</a>
+<a href="auto-detailing.html">Auto Detailing</a>
+<a href="partners.html">Partners</a>
+<a href="about.html">About</a>
+<a href="contact.html" class="nav-cta">Contact</a>
+<details class="nav-more">
+<summary>More</summary>
+<div class="more-menu">
+<a href="games.html">Games</a>
+<a href="cars.html">Cars</a>
+</div>
+</details>
+</nav>
+</div>
+</header>
+<section class="page-title">
+<div class="wrap">
+<p class="eyebrow"><a href="cars.html" class="backlink">&larr; Back to Cars</a></p>
+<h1>Big Purp</h1>
+<p class="lede">1999 Honda Civic &middot; Drag car &middot; Owned by Cora</p>
+</div>
+</section>
+<section style="padding-top:8px;">
+<div class="wrap">
+<div class="car-main"><img src="images/bigpurp.jpg" alt="Big Purp — a purple 1999 Honda Civic drag car"></div>
+<!-- SPECS: owner to fill in the real numbers. Keep the same .spec markup to add rows. -->
+<div class="specs">
+<div class="spec"><div class="k">Year</div><div class="v">1999</div></div>
+<div class="spec"><div class="k">Make / Model</div><div class="v">Honda Civic</div></div>
+<div class="spec"><div class="k">Build</div><div class="v">Drag car</div></div>
+<div class="spec"><div class="k">Engine</div><div class="v">Details coming soon</div></div>
+<div class="spec"><div class="k">Wheels</div><div class="v">Details coming soon</div></div>
+<div class="spec"><div class="k">Suspension</div><div class="v">Details coming soon</div></div>
+<div class="spec"><div class="k">Mods</div><div class="v">Details coming soon</div></div>
+</div>
+</div>
+</section>
+<section class="alt">
+<div class="wrap">
+<p class="eyebrow">The story</p>
+<h2>About Big Purp</h2>
+<p class="lede" style="max-width:64ch;">Details coming soon &mdash; Cora can drop the build story here: the drag setup, best times, and what's next.</p>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="eyebrow">Gallery</p>
+<h2>More of Big Purp</h2>
+<div class="gallery-grid">
+<div class="tile land"><div class="img"><img src="images/bigpurp.jpg" alt="Big Purp, the purple Honda Civic drag car" loading="lazy"></div></div>
+<!-- Add more Big Purp photos here, same markup: <div class="tile land"><div class="img"><img src="images/FILE.jpg" alt="..." loading="lazy"></div></div> -->
+</div>
+</div>
+</section>
+<footer><div class="wrap"><p><strong>Vale &amp; Co</strong> &nbsp;·&nbsp; Photography, Social Media &amp; Detailing &nbsp;·&nbsp; Topeka, Kansas</p></div></footer>
+<script>
+(function(){
+var hdr = document.querySelector('.site-header');
+if(!hdr){ return; }
+function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 80); }
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+</body>
+</html>
