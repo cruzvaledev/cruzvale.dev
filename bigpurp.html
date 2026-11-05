@@ -131,11 +131,11 @@ Your browser does not support the video tag.
 <div class="carousel" data-delay="3000">
 <div class="track">
 <div class="slide"><div class="frame"><img src="images/bigpurp.jpg" alt="Big Purp — purple 1999 Honda Civic drag car"></div></div>
-<div class="slide"><div class="frame"><img src="images/bigpurp-g1.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
-<div class="slide"><div class="frame"><img src="images/bigpurp-g2.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
-<div class="slide"><div class="frame"><img src="images/bigpurp-g3.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
-<div class="slide"><div class="frame"><img src="images/bigpurp-g4.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
-<div class="slide"><div class="frame"><img src="images/bigpurp-g5.jpg" alt="Big Purp gallery photo" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g1.jpg" alt="Big Purp on jack stands mid wheel swap, with a stack of tires beside it" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g2.jpg" alt="Big Purp with the hood off in the pits at a drag strip" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g3.jpg" alt="Front view of Big Purp and its patterned hood under gas station lights at night" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g4.jpg" alt="Big Purp parked at a sunny car show" loading="lazy"></div></div>
+<div class="slide"><div class="frame"><img src="images/bigpurp-g5.jpg" alt="Big Purp in a parking lot at dusk" loading="lazy"></div></div>
 </div>
 <button class="cbtn cprev" aria-label="Previous photo">&#8249;</button>
 <button class="cbtn cnext" aria-label="Next photo">&#8250;</button>
@@ -170,31 +170,6 @@ window.addEventListener('scroll', onScroll, { passive: true });
   for(var i=0;i<vids.length;i++){ io.observe(vids[i]); }
 })();
 </script>
-<script>
-(function(){
-  function initCarousel(c){
-    var track=c.querySelector('.track');
-    var slides=c.querySelectorAll('.slide');
-    var n=slides.length;
-    if(n<=1){ c.classList.add('single'); return; }
-    var dotsWrap=c.querySelector('.dots');
-    var i=0, timer=null, delay=parseInt(c.getAttribute('data-delay')||'3000',10);
-    var dots=[];
-    for(var k=0;k<n;k++){ (function(k){ var b=document.createElement('button'); b.setAttribute('aria-label','Go to photo '+(k+1)); b.addEventListener('click', function(){ go(k); reset(); }); dotsWrap.appendChild(b); dots.push(b); })(k); }
-    function go(idx){ i=(idx+n)%n; track.style.transform='translateX(-'+(i*100)+'%)'; for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===i); } }
-    function next(){ go(i+1); } function prev(){ go(i-1); }
-    function start(){ timer=setInterval(next, delay); } function stop(){ clearInterval(timer); } function reset(){ stop(); start(); }
-    c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
-    c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
-    c.addEventListener('mouseenter', stop); c.addEventListener('mouseleave', start);
-    var x0=null;
-    c.addEventListener('touchstart', function(e){ x0=e.touches[0].clientX; stop(); }, { passive:true });
-    c.addEventListener('touchend', function(e){ if(x0===null){ return; } var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){ if(dx<0){ next(); } else { prev(); } } x0=null; start(); }, { passive:true });
-    go(0); start();
-  }
-  var cs=document.querySelectorAll('.carousel');
-  for(var ci=0; ci<cs.length; ci++){ initCarousel(cs[ci]); }
-})();
-</script>
+<script src="site.js" defer></script>
 </body>
 </html>

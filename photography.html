@@ -101,14 +101,14 @@
 <h2>Portraits</h2>
 <div class="carousel" data-autoplay="4500">
 <div class="track">
-<div class="slide"><div class="frame"><img src="images/portrait-1.jpg" alt="Portrait photograph" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-2.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-3.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-4.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-5.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-6.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-7.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/portrait-8.jpg" alt="Portrait photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-1.jpg" alt="Portrait of a young man in a tan work jacket against a layered rock bluff" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-2.jpg" alt="Portrait of a young woman in a red dress leaning against a brick wall in warm light" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-3.jpg" alt="Portrait of a smiling young man at sunset with the Kansas State Capitol dome behind him" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-4.jpg" alt="Portrait of a young man in a baseball jacket in front of the Kansas State Capitol" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-5.jpg" alt="Senior portrait of a young man in a red letterman jacket in the woods" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-6.jpg" alt="A young woman laughing under bare tree branches against a deep blue sky" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-7.jpg" alt="Portrait of a smiling young man in a black shirt in front of a rocky bluff" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/portrait-8.jpg" alt="Portrait of a young man in a beanie and plaid flannel by a rock bluff" loading="lazy" /></div></div>
 </div>
 <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
 <button class="cbtn cnext" aria-label="Next">&#8250;</button>
@@ -158,11 +158,11 @@
 <h2>Headphones</h2>
 <div class="carousel" data-autoplay="4000">
 <div class="track">
-<div class="slide"><div class="frame"><img src="images/headphones-1.jpg" alt="Headphones product photograph" /></div></div>
-<div class="slide"><div class="frame"><img src="images/headphones-2.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/headphones-3.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/headphones-4.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
-<div class="slide"><div class="frame"><img src="images/headphones-5.jpg" alt="Headphones product photograph" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-1.jpg" alt="Black wireless sport earbuds on a white background" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-2.jpg" alt="Wireless earbuds with their inline remote, shot on white" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-3.jpg" alt="Lifestyle shot of NOBZ wireless earbuds worn around the neck outdoors" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-4.jpg" alt="NOBZ earbud carrying case with charging cable and spare ear tips" loading="lazy" /></div></div>
+<div class="slide"><div class="frame"><img src="images/headphones-5.jpg" alt="NOBZ Earwear wired earbuds in their retail packaging" loading="lazy" /></div></div>
 </div>
 <button class="cbtn cprev" aria-label="Previous">&#8249;</button>
 <button class="cbtn cnext" aria-label="Next">&#8250;</button>
@@ -267,42 +267,7 @@ setHH(); onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', setHH);
 window.addEventListener('load', setHH);
-function initCarousel(c){
-var track = c.querySelector('.track');
-var slides = c.querySelectorAll('.slide');
-var n = slides.length;
-if(n <= 1){ c.classList.add('single'); return; }
-var dotsWrap = c.querySelector('.dots');
-var i = 0, timer = null, delay = parseInt(c.getAttribute('data-autoplay') || '5000', 10);
-var dots = [];
-for(var k = 0; k < n; k++){ (function(k){
-var b = document.createElement('button');
-b.addEventListener('click', function(){ go(k); reset(); });
-dotsWrap.appendChild(b); dots.push(b);
-})(k); }
-function go(idx){ i = (idx + n) % n; track.style.transform = 'translateX(-' + (i * 100) + '%)';
-for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('active', d === i); } }
-function next(){ go(i + 1); }
-function prev(){ go(i - 1); }
-function start(){ timer = setInterval(next, delay); }
-function stop(){ clearInterval(timer); }
-function reset(){ stop(); start(); }
-c.querySelector('.cnext').addEventListener('click', function(){ next(); reset(); });
-c.querySelector('.cprev').addEventListener('click', function(){ prev(); reset(); });
-c.addEventListener('mouseenter', stop);
-c.addEventListener('mouseleave', start);
-var x0 = null;
-c.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, { passive: true });
-c.addEventListener('touchend', function(e){
-if(x0 === null){ return; }
-var dx = e.changedTouches[0].clientX - x0;
-if(Math.abs(dx) > 40){ if(dx < 0){ next(); } else { prev(); } }
-x0 = null; start();
-}, { passive: true });
-go(0); start();
-}
-var carousels = document.querySelectorAll('.carousel');
-for(var ci = 0; ci < carousels.length; ci++){ initCarousel(carousels[ci]); }
 </script>
+<script src="site.js" defer></script>
 </body>
 </html>
